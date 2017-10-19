@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteBase /
+RewriteCond $1 !^(index\.php|public|robots\.txt|$)
+RewriteRule ^(.*)$ /lrs/index.php/$1 
