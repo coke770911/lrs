@@ -4,6 +4,10 @@ application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
 
+
+#database
+application/config/database.php
+
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
@@ -16,8 +20,6 @@ user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 /vendor/
 
-#database
-database.php
 
 # IDE Files
 #-------------------------
