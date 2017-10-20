@@ -20,7 +20,7 @@
                     <div class="col-xs-12">
                         <div class="radio">
                           <label>
-                            <input type="radio" name="rg_item" value="<?php echo $value['le_id']?>">
+                            <input type="radio" name="rg_item" value="<?php echo $value['le_name']?>">
                             <?php echo $value['le_name']?>
                           </label>
                         </div>

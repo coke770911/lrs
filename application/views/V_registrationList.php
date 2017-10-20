@@ -4,7 +4,12 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>#</th><th>證照項目</th><th>考試時間</th><th>報名截止日</th><th>考照人數限制</th><th>功能</th>
+                <th class="text-center">#</th>
+                <th class="text-center">證照項目</th>
+                <th class="text-center">考試時間</th>
+                <th class="text-center">報名截止日</th>
+                <th class="text-center">考照人數限制</th>
+                <th class="text-center">功能</th>
             </tr>
         </thead>
         <tbody>
@@ -12,14 +17,12 @@
             $i = 1;
             foreach($list as $row) {
                 echo "<tr>" ;
-                echo "<td>".$i++."</td>";
-                echo "<td>".$row['rg_name']."</td>";
-
-
-                echo "<td>".$this->tools->date_f($row['rg_startDate'])." ~ ".$this->tools->date_f($row['rg_endDate'])."</td>";
-                echo "<td>".$this->tools->date_f($row['rg_applyEndDate'])."</td>";
-                echo "<td>".$row['rg_number']."</td>";
-                echo "<td><a class='btn btn-default btn_apply' href='/lrs/Registration/apply/".$row['rg_id']."'>報名</a></td>";
+                echo "<td class='text-center'>".$i++."</td>";
+                echo "<td class='text-center'>".$row['rg_name']."</td>";
+                echo "<td class='text-center'>".$this->tools->date_f($row['rg_startDate'])." ~ ".$this->tools->date_f($row['rg_endDate'])."</td>";
+                echo "<td class='text-center'>".$this->tools->date_f($row['rg_applyEndDate'])."</td>";
+                echo "<td class='text-center'>".$row['rg_number']."</td>";
+                echo "<td class='text-center'><a class='btn btn-default btn_apply' href='/lrs/Registration/apply/".$row['rg_id']."'>報名</a></td>";
                 echo "</tr>" ;
             }
         ?>    

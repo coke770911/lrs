@@ -20,7 +20,7 @@ class M_UserApply extends CI_Model {
     private $ap_us_memo = "";
     private $ap_is_regi = "";
     private $ap_is_del = 0;
-    private $ap_score = 0;
+    private $ap_score = -1;
 
 
     public function __construct() {
@@ -33,11 +33,12 @@ class M_UserApply extends CI_Model {
         }
     }
 
-    public function getApplyList($aid) {
-        $query = $this->db->get_where('Apply', array('ap_id' => $aid,'ap_is_del' => 0));
+    public function getApplyList($us_no) {
+        $sql = "SELECT * FROM [Registration].[dbo].[Apply] LEFT JOIN [Registration].[dbo].[Registration] ON [ap_rg_id] = [rg_id] WHERE ap_us_no = ?";
+        $param = array($us_no);
+        $query = $this->db->query($sql,$param);
         if ($query->num_rows() > 0) {
-            $result = $query->row_array();
-            $this->setValue($result);
+            $result = $query->result_array();
             return $result;
         } 
     }
@@ -71,7 +72,7 @@ class M_UserApply extends CI_Model {
 
     public function update() {
         if($this->ap_id === 0) {
-            $sql = "INSERT INTO [dbo].[Apply]([ap_rg_id],[ap_rg_name],[ap_le_name],[ap_rg_money],[ap_us_no],[ap_us_name],[ap_us_ename],[ap_us_id],[ap_us_sex],[ap_us_cdept],[ap_us_phone],[ap_us_email],[ap_us_memo],[ap_is_regi]) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO [dbo].[Apply]([ap_rg_id],[ap_rg_name],[ap_le_name],[ap_rg_money],[ap_us_no],[ap_us_name],[ap_us_ename],[ap_us_id],[ap_us_sex],[ap_us_cdept],[ap_us_phone],[ap_us_email],[ap_us_memo],[ap_is_regi],[ap_score]) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $param = array(
                         $this->ap_rg_id,
                         $this->ap_rg_name,
@@ -86,7 +87,8 @@ class M_UserApply extends CI_Model {
                         $this->ap_us_phone,
                         $this->ap_us_email,
                         $this->ap_us_memo,
-                        $this->ap_is_regi
+                        $this->ap_is_regi,
+                        $this->ap_score
                         );
             $this->db->query($sql,$param);
             return $this->db->affected_rows();

@@ -34,6 +34,7 @@ $('#btn_apply_submit').click(function() {
     $.post("/lrs/Apply",$('#formData').serialize(),function(data){
         if(data.code != '0') {
             alert(data.msg);
+            location.replace("/lrs/Apply/historyList");
         } else {
             alert(data.msg);
         }

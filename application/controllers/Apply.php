@@ -10,6 +10,31 @@ class Apply extends CI_Controller {
         $this->load->model("M_UserApply");
     }
 
+    public function Detailed($id) {
+
+    }
+
+    public function Cancel($id) {
+        $this->M_UserApply->getData($id);
+        print_r($this->M_UserApply);
+        /*
+        $data = array("ap_is_del" => 1);
+        $this->M_UserApply->setValue($data);
+        $re = $this->M_UserApply->update();
+        if($re > 0) {
+            die(json_encode(array('code' => 1,'msg' => '取消報名成功!')));
+        } else {
+            die(json_encode(array('code' => 0,'msg' => '取消報名失敗，請洽承辦人協助取消!')));
+        */
+    }
+
+    public function historyList() {
+        $data["list"] = $this->M_UserApply->getApplyList($this->session->us_no);
+        $this->load->view('V_header');
+        $this->load->view('V_historyList',$data);
+        $this->load->view('V_footer');
+    }
+
     public function index() {
         if($this->session->login == NULL || $this->session->login == '') {
             die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
@@ -69,24 +94,21 @@ class Apply extends CI_Controller {
         }
        
         $data = array(
-                        "ap_rg_id" => $RegiData["rg_id"],
-                        "ap_rg_name" => $RegiData["rg_name"],
-                        "ap_le_name" => trim($this->input->post("rg_item")),
-                        "ap_rg_money" => $RegiData["rg_money"],
-                        "ap_us_name" => trim($this->input->post("c_name")),
-                        "ap_us_ename" => trim($this->input->post("e_name")),
-                        "ap_us_id" => trim($this->input->post("id")),
-                        "ap_us_no" => trim($this->input->post("no")),
-                        "ap_us_sex" => trim($this->input->post("sex")),
-                        "ap_us_cdept" => trim($this->input->post("c_dept")),
-                        "ap_us_phone" => trim($this->input->post("phone")),
-                        "ap_us_email" => trim($this->input->post("email")),
-                        "ap_is_regi" => trim($this->input->post("is_regi")),
-                        "ap_us_memo" => trim($this->input->post("memo"))
-                        );
-
-
-
+                    "ap_rg_id" => $RegiData["rg_id"],
+                    "ap_rg_name" => $RegiData["rg_name"],
+                    "ap_le_name" => trim($this->input->post("rg_item")),
+                    "ap_rg_money" => $RegiData["rg_money"],
+                    "ap_us_name" => trim($this->input->post("c_name")),
+                    "ap_us_ename" => trim($this->input->post("e_name")),
+                    "ap_us_id" => trim($this->input->post("id")),
+                    "ap_us_no" => trim($this->input->post("no")),
+                    "ap_us_sex" => trim($this->input->post("sex")),
+                    "ap_us_cdept" => trim($this->input->post("c_dept")),
+                    "ap_us_phone" => trim($this->input->post("phone")),
+                    "ap_us_email" => trim($this->input->post("email")),
+                    "ap_is_regi" => trim($this->input->post("is_regi")),
+                    "ap_us_memo" => trim($this->input->post("memo"))
+                );
         $this->M_UserApply->setValue($data);
         if($this->M_UserApply->checkApply() > 0) {
             die(json_encode(array('code' => 0,'msg' => '您已報名、請勿重複報名!')));
@@ -94,7 +116,7 @@ class Apply extends CI_Controller {
 
         $re = $this->M_UserApply->update();
         if($re > 0) {
-            die(json_encode(array('code' => 0,'msg' => '報名成功!')));
+            die(json_encode(array('code' => 1,'msg' => '報名成功!')));
         } else {
             die(json_encode(array('code' => 0,'msg' => '報名失敗，請洽尋承辦單位!')));
         }
