@@ -7,9 +7,13 @@ class Apply extends CI_Controller {
         parent::__construct();
         //載入M_Registration
         $this->load->model("M_Registration");
+        $this->load->model("M_UserApply");
     }
 
     public function index() {
+        if($this->session->login == NULL || $this->session->login == '') {
+            die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
+        }
         
         if(trim($this->input->post("rg_id")) == "") {
             die(json_encode(array('code' => 0,'msg' => '此考試項目不存在，請洽詢系統管理者!')));
@@ -51,6 +55,49 @@ class Apply extends CI_Controller {
             die(json_encode(array('code' => 0,'msg' => '請輸入電子郵件!')));
         }
 
-    }
+        $RegiData = $this->M_Registration->getDataIsExpired(trim($this->input->post("rg_id")));
 
+        if(count($RegiData) <= 0) {
+            die(json_encode(array('code' => 0,'msg' => '報名時間已過!')));
+        }
+
+        $applyData = $this->M_UserApply->getApplyNum(trim($this->input->post("rg_id")));
+
+
+        if( $applyData["countNum"] > $RegiData["rg_number"]) {
+            die(json_encode(array('code' => 0,'msg' => '報名人數已滿!')));
+        }
+       
+        $data = array(
+                        "ap_rg_id" => $RegiData["rg_id"],
+                        "ap_rg_name" => $RegiData["rg_name"],
+                        "ap_le_name" => trim($this->input->post("rg_item")),
+                        "ap_rg_money" => $RegiData["rg_money"],
+                        "ap_us_name" => trim($this->input->post("c_name")),
+                        "ap_us_ename" => trim($this->input->post("e_name")),
+                        "ap_us_id" => trim($this->input->post("id")),
+                        "ap_us_no" => trim($this->input->post("no")),
+                        "ap_us_sex" => trim($this->input->post("sex")),
+                        "ap_us_cdept" => trim($this->input->post("c_dept")),
+                        "ap_us_phone" => trim($this->input->post("phone")),
+                        "ap_us_email" => trim($this->input->post("email")),
+                        "ap_is_regi" => trim($this->input->post("is_regi")),
+                        "ap_us_memo" => trim($this->input->post("memo"))
+                        );
+
+
+
+        $this->M_UserApply->setValue($data);
+        if($this->M_UserApply->checkApply() > 0) {
+            die(json_encode(array('code' => 0,'msg' => '您已報名、請勿重複報名!')));
+        }
+
+        $re = $this->M_UserApply->update();
+        if($re > 0) {
+            die(json_encode(array('code' => 0,'msg' => '報名成功!')));
+        } else {
+            die(json_encode(array('code' => 0,'msg' => '報名失敗，請洽尋承辦單位!')));
+        }
+            
+    }
 }
