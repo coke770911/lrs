@@ -12,9 +12,6 @@ class Tools {
 
     }
 
-    public function date_f($str,$f = "Y/m/d H:i") {
-        return date_format(date_create($str),"Y/m/d H:i");
-    }
 
     function __destruct() {
 

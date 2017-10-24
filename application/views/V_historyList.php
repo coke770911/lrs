@@ -16,26 +16,31 @@
         </thead>
         <tbody>
         <?php
-            $i = 1;
-            foreach($list as $row) {
-                echo "<tr>" ;
-                echo "<td class='text-center'>".$i++."</td>";
-                echo "<td class='text-center'>".$row['ap_rg_name']."</td>";
-                echo "<td class='text-center'>".$row['ap_le_name']."</td>";
-                echo "<td class='text-center'>".$this->tools->date_f($row['rg_startDate'])." ~ ".$this->tools->date_f($row['rg_endDate'])."</td>";
-                echo "<td class='text-center'>".$this->tools->date_f($row['rg_applyEndDate'])."</td>";
-                echo "<td class='text-center'>".$row['ap_rg_money']."</td>";
-                if($row['ap_score'] == -1) {
-                    echo "<td class='text-center'>尚未輸入</td>";
-                } else {
-                    echo "<td class='text-center'>".$row['ap_score']."</td>";
+            if(count($list) > 0 ) {
+                $i = 1;
+                foreach($list as $row) {
+                    echo "<tr>" ;
+                    echo "<td class='text-center'>".$i++."</td>";
+                    echo "<td class='text-center'>".$row['ap_rg_name']."</td>";
+                    echo "<td class='text-center'>".$row['ap_le_name']."</td>";
+                    echo "<td class='text-center'>".nice_date($row['rg_startDate'], 'Y-m-d H:i')." ~ ".nice_date($row['rg_endDate'], 'Y-m-d H:i')."</td>";
+                    echo "<td class='text-center'>".nice_date($row['rg_applyEndDate'], 'Y-m-d H:i')."</td>";
+                    echo "<td class='text-center'>".$row['ap_rg_money']."</td>";
+                    if($row['ap_score'] == -1) {
+                        echo "<td class='text-center'>尚未輸入</td>";
+                    } else {
+                        echo "<td class='text-center'>".$row['ap_score']."</td>";
+                    }
+                    echo "<td class='text-left'>";
+                    echo "<a class='btn btn-info' style='margin-right: 5px;' href='/lrs/Apply/Detailed/".$row['rg_id']."'>詳細</a>";
+                    if(now() <= nice_date($row['rg_applyEndDate'])) {
+                       echo "<button class='btn btn-danger btn_apply_cancel' type='button' data-id='".$row['ap_id']."'>取消報名</button>";
+                    } 
+
+                    echo "</td>";
+                    echo "</tr>" ;
                 }
-                echo "<td class='text-center'>";
-                echo "<a class='btn btn-default btn_apply' href='/lrs/Apply/Detailed".$row['ap_id']."'>詳細</a>";
-                echo "<button class='btn btn-default btn_apply_cancel' type='button' data='".$row['ap_id']."'>取消報名</button>";
-                echo "</td>";
-                echo "</tr>" ;
-            }
+            }   
         ?>    
         </tbody>
     </table>   

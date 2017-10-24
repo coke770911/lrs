@@ -10,32 +10,60 @@ class Apply extends CI_Controller {
         $this->load->model("M_UserApply");
     }
 
-    public function Detailed($id) {
+    public function applyData($id) {
+        if($this->session->login == NULL) {
+            die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
+        }
+
+        $data["rg"] = $this->M_Registration->getData($id);
+        $data["item"] = $this->M_Registration->getItem($id);
+
+        $this->load->view('V_header');
+        $this->load->view('V_apply',$data);
+        $this->load->view('V_footer');
+    }
+
+    public function editProcess() {
 
     }
 
-    public function Cancel($id) {
-        $this->M_UserApply->getData($id);
-        print_r($this->M_UserApply);
-        /*
+    public function detailed($id) {
+        $data["rg"] = $this->M_Registration->getData($id);
+        $data["item"] = $this->M_Registration->getItem($id);
+        $data["userdata"] = $this->M_UserApply->getEditData($id,$this->session->us_no);
+        print_r($data);
+        $this->load->view('V_header');
+        $this->load->view('V_detailed',$data);
+        $this->load->view('V_footer');
+    }
+
+    public function cancel() {
+        $this->M_UserApply->getData($this->input->post('id'));
         $data = array("ap_is_del" => 1);
         $this->M_UserApply->setValue($data);
         $re = $this->M_UserApply->update();
+
         if($re > 0) {
             die(json_encode(array('code' => 1,'msg' => '取消報名成功!')));
         } else {
             die(json_encode(array('code' => 0,'msg' => '取消報名失敗，請洽承辦人協助取消!')));
-        */
+        }
+
     }
 
     public function historyList() {
+        if($this->session->login == NULL || $this->session->login == '') {
+            die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
+        }
+
+
         $data["list"] = $this->M_UserApply->getApplyList($this->session->us_no);
         $this->load->view('V_header');
         $this->load->view('V_historyList',$data);
         $this->load->view('V_footer');
     }
 
-    public function index() {
+    public function addProcess() {
         if($this->session->login == NULL || $this->session->login == '') {
             die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
         }
@@ -88,7 +116,6 @@ class Apply extends CI_Controller {
 
         $applyData = $this->M_UserApply->getApplyNum(trim($this->input->post("rg_id")));
 
-
         if( $applyData["countNum"] > $RegiData["rg_number"]) {
             die(json_encode(array('code' => 0,'msg' => '報名人數已滿!')));
         }
@@ -110,6 +137,7 @@ class Apply extends CI_Controller {
                     "ap_us_memo" => trim($this->input->post("memo"))
                 );
         $this->M_UserApply->setValue($data);
+
         if($this->M_UserApply->checkApply() > 0) {
             die(json_encode(array('code' => 0,'msg' => '您已報名、請勿重複報名!')));
         }
@@ -119,7 +147,6 @@ class Apply extends CI_Controller {
             die(json_encode(array('code' => 1,'msg' => '報名成功!')));
         } else {
             die(json_encode(array('code' => 0,'msg' => '報名失敗，請洽尋承辦單位!')));
-        }
-            
+        }         
     }
 }

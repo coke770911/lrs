@@ -107,7 +107,7 @@ $config['log_threshold'] = 0;
 | application/logs/ directory. Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '';
+$config['log_path'] = 'application/logs/';
 
 /*
 |--------------------------------------------------------------------------
@@ -361,7 +361,7 @@ $config['compress_output'] = FALSE;
 | helper' page of the user guide for information regarding date handling.
 |
 */
-$config['time_reference'] = 'local';
+$config['time_reference'] = 'Asia/Taipei';
 
 /*
 |--------------------------------------------------------------------------

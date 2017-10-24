@@ -12,7 +12,7 @@ $('#login').click(function(){
         
         
     },"json").fail(function(){
-        alert("伺服器發生錯誤！");
+        alert("發生錯誤！");
     });
 });
 
@@ -25,22 +25,45 @@ $('#logout').click(function(){
             alert(data.msg);
         }
     }).fail(function(){
-        alert("伺服器發生錯誤！");
+        alert("發生錯誤！");
     });
 
 });
 
 $('#btn_apply_submit').click(function() {
-    $.post("/lrs/Apply",$('#formData').serialize(),function(data){
+    $.post("/lrs/Apply/addProcess",$('#formData').serialize(),function(data){
         if(data.code != '0') {
             alert(data.msg);
             location.replace("/lrs/Apply/historyList");
         } else {
             alert(data.msg);
         }
-    },"json");
+    },"json").fail(function(){
+        alert("發生錯誤！");
+    });
 });
 
-$('#btn_cancel').click(function() {
+$('.btn_apply_cancel').click(function() {
+    $this = $(this);
+    $id = $this.data("id");
+    if($id == '') {
+        alert('查無此申請！');
+        return 0;
+    }
 
+    $.post("/lrs/Apply/cancel",{id:$id},function(data) {
+        if(data.code != '0') {
+            alert(data.msg);
+            location.reload();
+        } else {
+            alert(data.msg);
+        }
+        
+    },"json").fail(function(){
+        alert("發生錯誤！");
+    });
+});
+
+$('#btn_apply_edit_submit').click(function() {
+    console.dir("A");
 });

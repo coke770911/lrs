@@ -18,18 +18,7 @@ class Registration extends CI_Controller {
         $this->load->view('V_footer');
     }
 
-    public function apply($id) {
-        if($this->session->login == NULL) {
-            die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
-        }
-
-        $data["rg"] = $this->M_Registration->getData($id);
-        $data["item"] = $this->M_Registration->getItem($id);
-
-        $this->load->view('V_header');
-        $this->load->view('V_apply',$data);
-        $this->load->view('V_footer');
-    }
+    
 
     public function historyList() {
         $this->load->view('V_header');
