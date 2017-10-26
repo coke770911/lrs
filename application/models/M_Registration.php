@@ -1,12 +1,25 @@
 <?php
 
 class M_Registration extends CI_Model {
+    private $rg_id = 0;
+    private $rg_name = '';
+    private $rg_startDate = '';
+    private $rg_endDate = '';
+    private $rg_memo = '';
+    private $rg_applyEndDate ='';
+    private $rg_money = '';
+    private $rg_creator = '';
+    private $rg_creatDate = '';
+    private $rg_number = '';
+    private $rg_is_regi = '';
+    private $rg_is_del = '';
+
 
     public function __construct() {
 
     }
 
-    private function setValue($data) {
+    public function setValue($data) {
         foreach($data as $val => $key) {
             $this->$key = $val;
         }

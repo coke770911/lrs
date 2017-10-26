@@ -13,18 +13,18 @@ class Registration extends CI_Controller {
     public function index()
     {
         $data["list"] =  $this->M_Registration->getList();
-        $this->load->view('V_header');
-        $this->load->view('V_registrationList',$data);
+        if($this->session->us_logid == null || $this->session->us_logid != "STAFF") {
+            $this->load->view('V_header');
+            $this->load->view('V_registrationList',$data);
+        } else {
+            $this->load->view('V_header_manage');
+        }
         $this->load->view('V_footer');
     }
-
-    
 
     public function historyList() {
         $this->load->view('V_header');
         $this->load->view('V_historyList');
         $this->load->view('V_footer');
     }
-
-
 }

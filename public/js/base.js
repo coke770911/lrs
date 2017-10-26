@@ -51,19 +51,31 @@ $('.btn_apply_cancel').click(function() {
         return 0;
     }
 
-    $.post("/lrs/Apply/cancel",{id:$id},function(data) {
-        if(data.code != '0') {
-            alert(data.msg);
-            location.reload();
-        } else {
-            alert(data.msg);
-        }
-        
-    },"json").fail(function(){
-        alert("發生錯誤！");
-    });
+    if(confirm("請再次確認是否取消報名")) {
+        $.post("/lrs/Apply/cancel",{id:$id},function(data) {
+            if(data.code != '0') {
+                alert(data.msg);
+                location.reload();
+            } else {
+                alert(data.msg);
+            }
+            
+        },"json").fail(function(){
+            alert("發生錯誤！");
+        });
+    }
+    
 });
 
 $('#btn_apply_edit_submit').click(function() {
-    console.dir("A");
+    $.post("/lrs/Apply/editProcess",$('#formData').serialize(),function(data){
+        if(data.code != '0') {
+            alert(data.msg);
+            location.replace("/lrs/Apply/historyList");
+        } else {
+            alert(data.msg);
+        }
+    },"json").fail(function(){
+        alert("發生錯誤！");
+    });
 });

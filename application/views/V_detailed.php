@@ -51,11 +51,11 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">備註說明</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3" disabled>12313213</textarea>
+                <textarea class="form-control" rows="3" disabled></textarea>
             </div>
         </div>
    
-        <h1>報名資料填寫</h1>
+        <h1>報名資料</h1>
         <hr>
         <div class="form-group">
             <label class="col-sm-2 control-label">學號</label>
@@ -93,7 +93,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">身分證字號</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="身分證字號" name="id" value="<?php echo $userdata["ap_us_id"] ?>">
+                <input type="text" class="form-control" placeholder="身分證字號" name="id" disabled value="<?php echo $userdata["ap_us_id"] ?>">
             </div>
         </div>
        
@@ -153,5 +153,6 @@
             </div>
             <div class="col-sm-4"></div>
         </div>  
+
     </form>
 </div>

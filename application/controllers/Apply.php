@@ -24,14 +24,60 @@ class Apply extends CI_Controller {
     }
 
     public function editProcess() {
+        if($this->session->login == NULL || $this->session->login == '') {
+            die(json_encode(array('code' => 0,'msg' => '請先登入之後再進行報名動作！!')));
+        }
 
+        if(trim($this->input->post("rg_id")) == "") {
+            die(json_encode(array('code' => 0,'msg' => '此考試項目不存在，請洽詢系統管理者!')));
+        }
+
+        if(trim($this->input->post("rg_item")) == "") {
+            die(json_encode(array('code' => 0,'msg' => '請選擇考試項目!')));
+        }
+
+        if(trim($this->input->post("e_name")) == "") {
+            die(json_encode(array('code' => 0,'msg' => '請輸入英文姓名!')));
+        }
+        
+
+        if(trim($this->input->post("c_dept")) == "") {
+            die(json_encode(array('code' => 0,'msg' => '請輸入系年班!')));
+        }
+
+        if(trim($this->input->post("phone")) == "") {
+            die(json_encode(array('code' => 0,'msg' => '請輸入連絡電話!')));
+        }
+
+        if(trim($this->input->post("email")) == "") {
+            die(json_encode(array('code' => 0,'msg' => '請輸入電子郵件!')));
+        }
+
+        $this->M_UserApply->getEditData(trim($this->input->post("rg_id")),$this->session->us_no);
+
+       
+        $data = array(
+                    "ap_rg_id" => trim($this->input->post("rg_id")),
+                    "ap_le_name" => trim($this->input->post("rg_item")),
+                    "ap_us_ename" => trim($this->input->post("e_name")),
+                    "ap_us_cdept" => trim($this->input->post("c_dept")),
+                    "ap_us_phone" => trim($this->input->post("phone")),
+                    "ap_us_email" => trim($this->input->post("email")),
+                    "ap_us_memo" => trim($this->input->post("memo"))
+                );
+        $this->M_UserApply->setValue($data);
+        $re = $this->M_UserApply->update();
+        if($re > 0) {
+            die(json_encode(array('code' => 1,'msg' => '修改成功!')));
+        } else {
+            die(json_encode(array('code' => 0,'msg' => '修改失敗，請洽尋承辦單位!')));
+        }         
     }
 
     public function detailed($id) {
         $data["rg"] = $this->M_Registration->getData($id);
         $data["item"] = $this->M_Registration->getItem($id);
         $data["userdata"] = $this->M_UserApply->getEditData($id,$this->session->us_no);
-        print_r($data);
         $this->load->view('V_header');
         $this->load->view('V_detailed',$data);
         $this->load->view('V_footer');
@@ -65,7 +111,7 @@ class Apply extends CI_Controller {
 
     public function addProcess() {
         if($this->session->login == NULL || $this->session->login == '') {
-            die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
+            die(json_encode(array('code' => 0,'msg' => '請先登入之後再進行報名動作！!')));
         }
         
         if(trim($this->input->post("rg_id")) == "") {

@@ -44,11 +44,7 @@ class User extends CI_Controller {
             $account = $acc_temp[1];
             if(!in_array($account, $this->tools->getAdminArr())) {
                 $this->session->sess_destroy();
-                $re = json_encode(array(
-                'code' => 0,
-                'msg' => '請勿使用不合法方式登入系統！！'
-                ));
-                die($re);
+                die(json_encode(array('code' => 0,'msg' => '請勿使用不合法方式登入系統！！')));
             }
             $this->session->admin = 1;
         }
@@ -61,7 +57,6 @@ class User extends CI_Controller {
         $code = ldap_errno($ad);
 
         if ($code == 0) {
-
             $UserData = $this->M_UserData->getUserData($username);
             if($UserData == "") {
                 $re = json_encode(array('code' => 0,'msg' => '找不到您的資料！'));
