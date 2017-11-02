@@ -34,7 +34,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
                         <ul class="nav navbar-nav">
                             <li><a href="/lrs/Manage">證照考試列表</a></li>
-                            <li><a href="/lrs/Manage/add">新增證照考試</a></li>
+                            <li><a href="/lrs/Manage/addTheme">新增證照考試</a></li>
+                            <li><a href="/lrs/Manage/addItem">新增證照選項</a></li>
                         </ul>
                         <?php if($this->session->login === '1') { ?>
                         <form class="navbar-form navbar-right" id="logoutform" name="logoutform" method="POST" action="User/logout">

@@ -118,7 +118,7 @@
             </div>
         </div>
 
-        <?php if($rg['rg_is_regi'] == "1") { ?>
+        <?php if($rg['rg_is_regi'] == 1) { ?>
             <div class="form-group">
                 <label class="col-sm-2 control-label">註冊</label>
                 <div class="col-sm-10">
@@ -147,7 +147,7 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button type="button" id="btn_cancel" class="btn btn-danger btn-lg btn-block">取消報名</button>
+                <button type="button" class="btn btn-danger btn-lg btn-block" onclick"location.replace('/lrs')">取消報名</button>
             </div>
             <div class="col-sm-4"></div>
         </div>  

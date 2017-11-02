@@ -79,3 +79,94 @@ $('#btn_apply_edit_submit').click(function() {
         alert("發生錯誤！");
     });
 });
+
+$('#btn_addItem_submit').click(function(){
+    $.post("/lrs/Manage/addItemProcess",$('#formData').serialize(),function(data){
+        if(data.code != '0') {
+            alert(data.msg);
+            location.reload();
+        } else {
+            alert(data.msg);
+        }
+    },'json').fail(function(){
+        alert("發生錯誤！");
+        location.reload();
+    });
+})
+
+
+
+
+
+$('#btn_addTheme_submit').click(function() {
+    $.post("/lrs/Manage/addThemeProcess",$('#formData').serialize(),function(data){
+       if(data.code != '0') {
+            alert(data.msg);
+            location.href = "/lrs/Manage/"
+        } else {
+            alert(data.msg);
+        }
+    },'json').fail(function(){
+        alert("發生錯誤！");
+    });
+})
+
+$('input[name=rg_number]').keyup(function () {
+        this.value = this.value.replace(/[^0-9\.-]/g, '');
+});
+
+
+$('input[name=rg_money]').keyup(function () {
+    this.value = this.value.replace(/[^0-9\.-]/g, '');
+});
+
+//控制Item呈現
+$('#sel_lg_group').change(function(){
+    $this = $(this);
+    $('#lg_item').load('/lrs/Manage/selItem/'+$this.val());
+})
+
+//控制選項New Add
+$('#btn_addItem').click(function(){
+    var $tag_element = $("#lg_item option:selected");
+    if($tag_element.val() === "0") {
+        return 0;
+    }
+    
+    var $label = $('<label>')
+    $label.text($tag_element.text());
+    var $input = $('<input class="chKSelVal" type="hidden" name="item[]">');
+
+    $input.val($tag_element.val());
+
+
+    
+
+    var $a_link = '<a><span class="glyphicon glyphicon-remove"></span><a>';
+    var $div_radio = $('<div class="col-xs-12 radio">');
+    $div_radio.append($label).append($input).append($a_link);
+    var $div = $('<div class="row">').append($div_radio);
+
+    var chkVal = true;
+    $('.chKSelVal').each(function(){
+        $this = $(this);
+        if($this.val() == $tag_element.val()) {
+            chkVal = false;
+        }
+    })
+    if(chkVal) {
+        $("#itemContent").append($div);
+    }
+})
+
+
+$("#itemContent").on("click",'.glyphicon-remove',function(){
+    $this = $(this);
+    $this.parents('.row').remove();
+})
+
+$(function(){
+    $('.datainput').appendDtpicker({
+        "closeOnSelected": true
+    });
+});

@@ -30,6 +30,7 @@ class M_UserData extends CI_Model {
     }
 
 
+
     public function getUserData($uid) {
         $query = $this->db->get_where('UserData', array('us_no' => $uid));
         if ($query->num_rows() > 0) {

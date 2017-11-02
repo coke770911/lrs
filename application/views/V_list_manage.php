@@ -23,7 +23,8 @@
                     echo "<td class='text-center'>".nice_date($row['rg_startDate'], 'Y-m-d H:i')." ~ ".nice_date($row['rg_endDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".nice_date($row['rg_applyEndDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".$row['rg_number']."</td>";
-                    echo "<td class='text-center'><a class='btn btn-default btn_apply' href='/lrs/Manage/detailed/".$row['rg_id']."'>詳細</a></td>";
+                    echo "<td class='text-center'></td>";
+                    //echo "<td class='text-center'><a class='btn btn-default btn_apply' href='/lrs/Manage/detailed/".$row['rg_id']."'>詳細</a></td>";
                     echo "</tr>" ;
                 }
             }
