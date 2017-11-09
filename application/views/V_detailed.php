@@ -34,7 +34,7 @@
             <label class="col-sm-2 control-label">考試費用</label>
             <div class="col-sm-10">
                 <label class="control-label" >
-                    <?php echo $rg['rg_money'] ?>
+                    <?php echo number_format($rg['rg_money']) ?>
                 </label>
             </div>
         </div>

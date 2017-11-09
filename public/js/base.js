@@ -140,8 +140,6 @@ $('#btn_addItem').click(function(){
     $input.val($tag_element.val());
 
 
-    
-
     var $a_link = '<a><span class="glyphicon glyphicon-remove"></span><a>';
     var $div_radio = $('<div class="col-xs-12 radio">');
     $div_radio.append($label).append($input).append($a_link);
@@ -170,3 +168,8 @@ $(function(){
         "closeOnSelected": true
     });
 });
+
+$("#lg_item_check").click(function(){
+    $this = $(this);
+    $('#item_check_list').load('/lrs/Manage/selItem/'+$this.val());
+})

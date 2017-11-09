@@ -21,6 +21,7 @@ class M_UserApply extends CI_Model {
     private $ap_is_regi = "";
     private $ap_is_del = 0;
     private $ap_score = -1;
+    private $ap_is_pay = 0;
 
 
     public function __construct() {
@@ -33,7 +34,17 @@ class M_UserApply extends CI_Model {
         }
     }
 
-    public function getApplyList($us_no) {
+    public function getApplyList($rg_id) {
+        $sql = "SELECT * FROM [Registration].[dbo].[Apply] LEFT JOIN [Registration].[dbo].[Registration] ON [ap_rg_id] = [rg_id] WHERE ap_rg_id = ? AND ap_is_del = 0";
+        $param = array($rg_id);
+        $query = $this->db->query($sql,$param);
+        if ($query->num_rows() > 0) {
+            $result = $query->result_array();
+            return $result;
+        } 
+    }
+
+    public function getUserApplyList($us_no) {
         $sql = "SELECT * FROM [Registration].[dbo].[Apply] LEFT JOIN [Registration].[dbo].[Registration] ON [ap_rg_id] = [rg_id] WHERE ap_us_no = ? AND ap_is_del = 0";
         $param = array($us_no);
         $query = $this->db->query($sql,$param);
@@ -84,7 +95,7 @@ class M_UserApply extends CI_Model {
 
     public function update() {
         if($this->ap_id === 0) {
-            $sql = "INSERT INTO [dbo].[Apply]([ap_rg_id],[ap_rg_name],[ap_le_name],[ap_rg_money],[ap_us_no],[ap_us_name],[ap_us_ename],[ap_us_id],[ap_us_sex],[ap_us_cdept],[ap_us_phone],[ap_us_email],[ap_us_memo],[ap_is_regi],[ap_score]) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO [dbo].[Apply]([ap_rg_id],[ap_rg_name],[ap_le_name],[ap_rg_money],[ap_us_no],[ap_us_name],[ap_us_ename],[ap_us_id],[ap_us_sex],[ap_us_cdept],[ap_us_phone],[ap_us_email],[ap_us_memo],[ap_is_regi],[ap_score],[ap_is_pay]) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             $param = array(
                         $this->ap_rg_id,
                         $this->ap_rg_name,
@@ -100,29 +111,31 @@ class M_UserApply extends CI_Model {
                         $this->ap_us_email,
                         $this->ap_us_memo,
                         $this->ap_is_regi,
-                        $this->ap_score
+                        $this->ap_score,
+                        $this->ap_is_pay
                         );
             $this->db->query($sql,$param);
             return $this->db->affected_rows();
         }  
 
         $sql = "UPDATE [dbo].[Apply] SET 
-            ap_rg_id = ?,
-            ap_rg_name = ?,
-            ap_le_name = ?,
-            ap_rg_money = ?,
-            ap_us_id = ?,
-            ap_us_name = ?,
-            ap_us_ename = ?,
-            ap_us_no = ?,
-            ap_us_sex = ?,
-            ap_us_cdept = ?,
-            ap_us_phone = ?,
-            ap_us_email = ?,
-            ap_us_memo = ?,
-            ap_is_regi = ?,
-            ap_is_del = ?,
-            ap_score = ? WHERE ap_id = ?";
+                ap_rg_id = ?,
+                ap_rg_name = ?,
+                ap_le_name = ?,
+                ap_rg_money = ?,
+                ap_us_id = ?,
+                ap_us_name = ?,
+                ap_us_ename = ?,
+                ap_us_no = ?,
+                ap_us_sex = ?,
+                ap_us_cdept = ?,
+                ap_us_phone = ?,
+                ap_us_email = ?,
+                ap_us_memo = ?,
+                ap_is_regi = ?,
+                ap_is_del = ?,
+                ap_score = ? ,
+                ap_is_pay = ? WHERE ap_id = ?";
 
         $param = array(
                 $this->ap_rg_id ,
@@ -141,10 +154,10 @@ class M_UserApply extends CI_Model {
                 $this->ap_is_regi ,
                 $this->ap_is_del ,
                 $this->ap_score ,
+                $this->ap_is_pay,
                 $this->ap_id
                 );
         $this->db->query($sql,$param);
         return $this->db->affected_rows();
-
     }
 }

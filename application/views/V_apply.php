@@ -34,7 +34,7 @@
             <label class="col-sm-2 control-label">考試費用</label>
             <div class="col-sm-10">
                 <label class="control-label" >
-                    <?php echo $rg['rg_money'] ?>
+                    <?php echo number_format($rg['rg_money']) ?>
                 </label>
             </div>
         </div>
@@ -74,7 +74,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">英文姓名</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="英文姓名" name="e_name" value="<?php echo $this->session->us_ename ?>">
+                <input type="text" class="form-control" placeholder="英文姓名" name="e_name" value="<?php echo strtoupper($this->session->us_ename) ?>">
             </div>
         </div>
 
@@ -105,9 +105,9 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-2 control-label">連絡電話</label>
+            <label class="col-sm-2 control-label">行動電話</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="行動電話" name="phone" value="<?php echo $this->session->us_phone ?>">
+                <input type="text" class="form-control" placeholder="請輸入可連絡電話號碼" name="phone" value="<?php echo $this->session->us_phone ?>">
             </div>
         </div>
 
@@ -147,7 +147,7 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button type="button" class="btn btn-danger btn-lg btn-block" onclick"location.replace('/lrs')">取消報名</button>
+                <button type="button" class="btn btn-danger btn-lg btn-block" onclick"location.replace('/lrs')">回上一頁</button>
             </div>
             <div class="col-sm-4"></div>
         </div>  

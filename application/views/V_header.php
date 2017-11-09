@@ -7,7 +7,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>證照報名系統</title>
+    <title>證照考試報名系統</title>
     <link href="/lrs/public/css/bootstrap.min.css" rel="stylesheet">
     <link href="/lrs/public/css/layout.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -29,11 +29,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                       </button>
-                      <a class="navbar-brand" href="/lrs">證照報名系統</a>
+                      <a class="navbar-brand" href="/lrs">證照考試報名系統</a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
                         <ul class="nav navbar-nav">
-                            <li><a href="/lrs/Registration">證照報名</a></li>
+                            <li><a href="/lrs/Registration">證照考試報名</a></li>
                             <li><a href="/lrs/Apply/historyList">報名歷程</a></li>
                         </ul>
                         <?php if($this->session->login === '1') { ?>

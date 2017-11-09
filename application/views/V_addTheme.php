@@ -80,7 +80,7 @@
         </div>
 
         <div class="form-group">
-                <label class="col-sm-2 control-label">註冊</label>
+                <label class="col-sm-2 control-label">是否需官網註冊</label>
             <div class="col-sm-10">
                 <label class="checkbox-inline">
                     <input type="radio" name="rg_is_regi" value="1" >是

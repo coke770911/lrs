@@ -23,6 +23,21 @@ class Apply extends CI_Controller {
         $this->load->view('V_footer');
     }
 
+    public function PrintPay($id) {
+        $data["apply_data"] = $this->M_UserApply->getEditData($id,$this->session->us_no);
+        #陣列金錢填入
+        $numStr = $data["apply_data"]["ap_rg_money"];
+        $numArr = array_reverse(preg_split('//', $numStr, -1, PREG_SPLIT_NO_EMPTY));
+        $numArr[] = "$";
+        for($i = count($numArr); $i <= 10; $i++) {
+            $numArr[$i] = "";
+        }
+        $data["numArr"] = $numArr;
+        $data["rg"] = $this->M_Registration->getData($id);
+        $this->load->view('V_depositSlip',$data);
+
+    }
+
     public function editProcess() {
         if($this->session->login == NULL || $this->session->login == '') {
             die(json_encode(array('code' => 0,'msg' => '請先登入之後再進行報名動作！!')));
@@ -102,8 +117,7 @@ class Apply extends CI_Controller {
             die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
         }
 
-
-        $data["list"] = $this->M_UserApply->getApplyList($this->session->us_no);
+        $data["list"] = $this->M_UserApply->getUserApplyList($this->session->us_no);
         $this->load->view('V_header');
         $this->load->view('V_historyList',$data);
         $this->load->view('V_footer');

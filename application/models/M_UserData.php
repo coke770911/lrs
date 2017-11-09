@@ -1,7 +1,6 @@
 <?php
 
 class M_UserData extends CI_Model {
-
     private $us_uid = 0;
     private $us_name = "";
     private $us_logid = "";
@@ -29,8 +28,6 @@ class M_UserData extends CI_Model {
         }
     }
 
-
-
     public function getUserData($uid) {
         $query = $this->db->get_where('UserData', array('us_no' => $uid));
         if ($query->num_rows() > 0) {
@@ -43,6 +40,7 @@ class M_UserData extends CI_Model {
         if ($query->num_rows() > 0) {
             $result = $query->row_array();
             $this->setValue($result);
+            $this->us_ename = strtoupper($this->us_ename);
             $this->update();
             return $result;
         } else {
