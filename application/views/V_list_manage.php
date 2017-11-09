@@ -24,9 +24,9 @@
                     echo "<td class='text-center'>".nice_date($row['rg_applyEndDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".$row['rg_number']."</td>";
                     echo "<td class='text-center'>";
+                    echo "<a class='btn btn-info btn_apply' href='/lrs/Manage/detailed/".$row['rg_id']."'>詳細</a>";
                     echo "<a class='btn btn-default btn_apply' href='/lrs/Manage/detailed/".$row['rg_id']."'>詳細</a>";
-                    echo "<a class='btn btn-default btn_apply' href='/lrs/Manage/detailed/".$row['rg_id']."'>詳細</a>";
-                    echo "<a class='btn btn-default btn_apply' target='_blank' download='excel' href='/lrs/Manage/exportList/".$row['rg_id']."'>匯出名單</a>";
+                    echo "<a class='btn btn-success btn_apply' target='_blank' download='excel' href='/lrs/Manage/exportList/".$row['rg_id']."'>匯出名單</a>";
                     echo "</td>";
                     echo "</tr>" ;
                 }

@@ -153,8 +153,11 @@ class Manage extends CI_Controller {
     }
 
     public function detailed($id) {
-       
-
+        $data["rg"] = $this->M_Registration->getData($id);
+        $data["item"] = $this->M_Registration->getItem($id);
+        $this->load->view('V_header_manage');
+        $this->load->view('V_detailedTheme',$data);
+        $this->load->view('V_footer');
     }
 
 
