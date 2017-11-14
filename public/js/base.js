@@ -146,7 +146,7 @@ $('#btn_addItem').click(function(){
     var $div = $('<div class="row">').append($div_radio);
 
     var chkVal = true;
-    $('.chKSelVal').each(function(){
+    $('.chKSelVal').each(function() {
         $this = $(this);
         if($this.val() == $tag_element.val()) {
             chkVal = false;
@@ -158,18 +158,33 @@ $('#btn_addItem').click(function(){
 })
 
 
-$("#itemContent").on("click",'.glyphicon-remove',function(){
+$("#itemContent").on("click",'.glyphicon-remove',function() {
     $this = $(this);
     $this.parents('.row').remove();
 })
 
-$(function(){
+$(function() {
     $('.datainput').appendDtpicker({
         "closeOnSelected": true
     });
 });
 
-$("#lg_item_check").click(function(){
+$("#lg_item_check").click(function() {
     $this = $(this);
     $('#item_check_list').load('/lrs/Manage/selItem/'+$this.val());
+})
+
+
+$('#chk_all_sel').change(function() {
+    if($('#chk_all_sel:checked').length > 0) {
+        $('.itemCheck').each(function() {
+            $(this).prop('checked',true);
+        })
+        
+    } else {
+        $('.itemCheck').each(function() {
+            $(this).prop('checked',false);
+        })
+    }
+    
 })

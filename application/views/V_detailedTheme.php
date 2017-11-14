@@ -29,7 +29,22 @@
                 <?php } ?>
             </div>
         </div>
-
+        <div class="form-group">
+            <label class="col-sm-2 control-label">目前報名人數</label>
+            <div class="col-sm-10">
+                <label class="control-label" >
+                    <?php echo number_format($rg['rg_nowNumber']) ?>
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">報名限制人數</label>
+            <div class="col-sm-10">
+                <label class="control-label" >
+                    <?php echo number_format($rg['rg_number']) ?>
+                </label>
+            </div>
+        </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">考試費用</label>
             <div class="col-sm-10">

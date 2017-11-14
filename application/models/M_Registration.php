@@ -26,12 +26,12 @@ class M_Registration extends CI_Model {
     }
 
     public function getList() {
-        $query = $this->db->query('SELECT * FROM [Registration].[dbo].[Registration] WHERE rg_is_del = 0 AND rg_applyEndDate > getdate()');
+        $query = $this->db->query('SELECT *,(SELECT count(*) FROM [Registration].[dbo].[Apply] WHERE ap_rg_id = rg_id AND ap_is_del = 0) AS rg_nowNumber FROM [Registration].[dbo].[Registration] WHERE rg_is_del = 0 AND rg_applyEndDate > getdate()');
         return $query->result_array();
     }
 
     public function getData($id) {
-        $sql = 'SELECT * FROM [Registration].[dbo].[Registration] WHERE rg_id = ?';
+        $sql = 'SELECT *,(SELECT count(*) FROM [Registration].[dbo].[Apply] WHERE ap_rg_id = rg_id AND ap_is_del = 0) AS rg_nowNumber FROM [Registration].[dbo].[Registration] WHERE rg_id = ? AND rg_is_del = 0';
         $param = array($id);
         $query = $this->db->query($sql,$param);
         if($query->num_rows() > 0) {

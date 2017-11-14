@@ -26,6 +26,15 @@ class Manage extends CI_Controller {
         $this->load->view('V_footer');
     }
 
+    public function checkList($id) {
+        $data["info"] =  $this->M_Registration->getList();
+        $data["list"] = $this->M_UserApply->getApplyList($id);
+        print_r($data);
+        $this->load->view('V_header_manage');
+        $this->load->view('V_checkList',$data);
+        $this->load->view('V_footer');
+    }
+
     public function exportList($id) {
         $this->load->library('PHPExcel');
         $data = $this->M_UserApply->getApplyList($id);
