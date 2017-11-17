@@ -35,7 +35,9 @@ class M_Registration extends CI_Model {
         $param = array($id);
         $query = $this->db->query($sql,$param);
         if($query->num_rows() > 0) {
-            return $query->row_array();
+            $result = $query->row_array();
+            $this->setValue($result);
+            return $result;
         } else {
             return array();
         }
@@ -62,7 +64,7 @@ class M_Registration extends CI_Model {
 
     public function update() {
         if($this->rg_id === 0) {
-            $sql = '  INSERT INTO [Registration].[dbo].[Registration] ([rg_name],[rg_startDate],[rg_endDate],[rg_memo],[rg_applyEndDate],[rg_money],[rg_creator],[rg_number],[rg_is_regi]) VALUES(?,?,?,?,?,?,?,?,?)';
+            $sql = 'INSERT INTO [Registration].[dbo].[Registration] ([rg_name],[rg_startDate],[rg_endDate],[rg_memo],[rg_applyEndDate],[rg_money],[rg_creator],[rg_number],[rg_is_regi]) VALUES(?,?,?,?,?,?,?,?,?)';
             $param = array(
                 'rg_name' => $this->rg_name,
                 'rg_startDate' => $this->rg_startDate,
@@ -77,6 +79,35 @@ class M_Registration extends CI_Model {
             $this->db->query($sql,$param);
             return $this->db->insert_id();
         }
+
+        $sql = "UPDATE [Registration].[dbo].[Registration] 
+                SET rg_name = ?,
+                    rg_startDate = ?,
+                    rg_endDate = ?,
+                    rg_memo = ?,
+                    rg_applyEndDate = ?,
+                    rg_money = ?,
+                    rg_creator = ?,
+                    rg_number = ?,
+                    rg_is_regi = ?,
+                    rg_is_del = ?
+                WHERE rg_id = ?";
+
+        $param = array(
+            'rg_name' => $this->rg_name,
+            'rg_startDate' => $this->rg_startDate,
+            'rg_endDate' => $this->rg_endDate,
+            'rg_memo' => $this->rg_memo,
+            'rg_applyEndDate' => $this->rg_applyEndDate,
+            'rg_money' => $this->rg_money,
+            'rg_creator' => $this->rg_creator,
+            'rg_number' => $this->rg_number,
+            'rg_is_regi' => $this->rg_is_regi,
+            'rg_is_del' => $this->rg_is_del,
+            'rg_id' => $this->rg_id
+            );
+        $this->db->query($sql,$param);
+        return $this->db->affected_rows();
     }
 
     

@@ -7,7 +7,7 @@ class Tools {
     }
 
     public function getAdminArr() {
-        $adminArr = array("fz083");
+        $adminArr = array("fz083","fa016","ot113");
         return $adminArr;
 
     }

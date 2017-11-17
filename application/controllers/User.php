@@ -63,7 +63,15 @@ class User extends CI_Controller {
                 die($re);
             }
             $this->session->set_userdata($UserData);
- 
+           
+            
+            if($this->session->us_logid == "STAFF") {
+                if(!in_array($this->session->us_no, $this->tools->getAdminArr())) {
+                    $this->session->sess_destroy();
+                    die(json_encode(array('code' => 0,'msg' => '請勿使用不合法方式登入系統！！')));
+                }
+            }
+
             $this->session->login = '1';
             $re = json_encode(array('code' => 1,'msg' => '登入成功!'));
             die($re);

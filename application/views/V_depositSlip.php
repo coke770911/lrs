@@ -384,8 +384,7 @@
                 項目
             </td>
             <td colspan="2" class="leftText">
-                代收<?php echo $apply_data["ap_rg_name"] ?><br>
-                「<?php echo $apply_data["ap_le_name"] ?>」證照認證考試報名費
+                代收「<?php echo $apply_data["ap_rg_name"] ?>-<?php echo $apply_data["ap_le_name"] ?>」證照認證考試報名費
             </td>
         </tr>
         <tr >

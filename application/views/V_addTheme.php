@@ -7,6 +7,8 @@
             <div class="col-sm-10">
                 <label class="control-label" >
                    <input type="text" class="form-control" name="rg_name">  
+                   <input type="hidden" name="rg_id" value="0">
+                   <input type="hidden" name="rg_mode" value="新增">
                 </label>
             </div>
         </div>
@@ -95,22 +97,16 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">備註說明</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3" name="rg_memo"></textarea>
+                <textarea class="form-control" rows="3" style="height: 200px;" name="rg_memo"></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button type="button" id="btn_addTheme_submit" class="btn btn-primary btn-lg btn-block">送出報名資料</button>
+                <button type="button" id="btn_Theme_submit" class="btn btn-primary btn-lg btn-block">新增報名資訊</button>
+                <button type="button" id="btn_cancel" class="btn btn-danger btn-lg btn-block">回上一頁</button>
             </div>
             <div class="col-sm-4"></div>
         </div>
-        <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button type="button" id="btn_cancel" class="btn btn-danger btn-lg btn-block">取消報名</button>
-            </div>
-            <div class="col-sm-4"></div>
-        </div>  
     </form>
 </div>

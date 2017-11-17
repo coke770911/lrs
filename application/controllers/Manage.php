@@ -18,18 +18,38 @@ class Manage extends CI_Controller {
     }
 
 
-    public function index()
-    {
+    public function index() {
         $data["list"] =  $this->M_Registration->getList();
         $this->load->view('V_header_manage');
         $this->load->view('V_list_manage',$data);
         $this->load->view('V_footer');
     }
 
+    public function payProcess() {
+        $arrID = $this->input->post('itemID');
+        if(!count($arrID) > 0) {
+            die(json_encode(array('code' => 0,'msg' => '未勾選任何學生！')));
+        }
+
+        $pay = 1;
+        if($this->input->post('pay') == 'false') {
+            $pay = 0;
+        }
+
+        foreach($arrID AS $val) {
+            $this->M_UserApply->getdata($val);
+            $this->M_UserApply->setValue(array('ap_is_pay' => $pay));
+            $re = $this->M_UserApply->update();
+            if(!$re > 0) {
+                die(json_encode(array('code' => 0,'msg' => '更新失敗！')));
+            }
+        }
+        die(json_encode(array('code' => 1,'msg' => '更新成功！')));
+    }
+
     public function checkList($id) {
         $data["info"] =  $this->M_Registration->getList();
         $data["list"] = $this->M_UserApply->getApplyList($id);
-        print_r($data);
         $this->load->view('V_header_manage');
         $this->load->view('V_checkList',$data);
         $this->load->view('V_footer');
@@ -85,19 +105,27 @@ class Manage extends CI_Controller {
     }
 
 
-    public function addThemeProcess() {
+
+
+    public function ThemeProcess() {
         if($this->session->login == NULL || $this->session->login == '') {
-            die(json_encode(array('code' => 0,'msg' => '請先登入之後再進行報名動作！!')));
+            die(json_encode(array('code' => 0,'msg' => '請先登入之後再進行動作！!')));
         }
 
-        if(trim($this->input->post("rg_name")) == "") {
-            die(json_encode(array('code' => 0,'msg' => '請輸入考試名稱!')));
-        }
+        if($this->input->post("rg_id") == 0) {
 
-        if($this->input->post('item') == "" ||  count($this->input->post('item')) === 0) {
-            die(json_encode(array('code' => 0,'msg' => '請選擇考試項目!')));
-        }
+            if(trim($this->input->post("rg_name")) == "") {
+                die(json_encode(array('code' => 0,'msg' => '請輸入考試名稱!')));
+            }
+
+            if($this->input->post('item') == "" ||  count($this->input->post('item')) === 0) {
+                die(json_encode(array('code' => 0,'msg' => '請選擇考試項目!')));
+            }
     
+        } else {
+            $this->M_Registration->getData($this->input->post("rg_id"));
+        }
+
         if(trim($this->input->post("rg_number")) == "") {
             die(json_encode(array('code' => 0,'msg' => '請輸入考試限制人數!')));
         }
@@ -122,14 +150,13 @@ class Manage extends CI_Controller {
             die(json_encode(array('code' => 0,'msg' => '請輸入備註!')));
         }
 
-
         $data = array(
             'rg_name' => trim($this->input->post("rg_name")), 
             'rg_startDate' => $this->input->post("rg_startDate"), 
             'rg_endDate' => $this->input->post("rg_endDate"), 
             'rg_memo' => trim($this->input->post("rg_memo")), 
             'rg_applyEndDate' => $this->input->post("rg_applyEndDate"),
-            'rg_money' => $this->input->post("rg_money"), 
+            'rg_money' => intval(str_replace(',', '', $this->input->post("rg_money"))), 
             'rg_creator' => $this->session->us_no, 
             'rg_number' => $this->input->post("rg_number"), 
             'rg_is_regi' => $this->input->post("rg_is_regi")
@@ -137,16 +164,33 @@ class Manage extends CI_Controller {
 
         $this->M_Registration->setValue($data);
         $theme_id = $this->M_Registration->update();
-        foreach($this->input->post('item') AS $val) {
-            $this->M_Registration->update_item($theme_id,$val);
-        }
 
-        die(json_encode(array('code' => 1,'msg' => '新增成功!')));
+        if($this->input->post("rg_id") == 0) {
+            foreach($this->input->post('item') AS $val) {
+                $this->M_Registration->update_item($theme_id,$val);
+            }
+        }
+        die(json_encode(array('code' => 1,'msg' => $this->input->post("rg_mode").'成功!')));
     }
 
+
+
+
     public function addTheme() {
+        $data["rg"] = array(
+                $rg_id = 0,
+                $rg_name = '',
+                $rg_startDate = '',
+                $rg_endDate = '',
+                $rg_memo = '',
+                $rg_applyEndDate ='',
+                $rg_money = '',
+                $rg_creator = '',
+                $rg_creatDate = '',
+                $rg_number = '',
+            );
         $this->load->view('V_header_manage');
-        $this->load->view('V_addTheme');
+        $this->load->view('V_addTheme',$data);
         $this->load->view('V_footer');
     }
 

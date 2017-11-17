@@ -94,12 +94,8 @@ $('#btn_addItem_submit').click(function(){
     });
 })
 
-
-
-
-
-$('#btn_addTheme_submit').click(function() {
-    $.post("/lrs/Manage/addThemeProcess",$('#formData').serialize(),function(data){
+$('#btn_Theme_submit').click(function() {
+    $.post("/lrs/Manage/ThemeProcess",$('#formData').serialize(),function(data){
        if(data.code != '0') {
             alert(data.msg);
             location.href = "/lrs/Manage/"
@@ -188,3 +184,27 @@ $('#chk_all_sel').change(function() {
     }
     
 })
+
+$('#btn_submit_is_pay').click(function(){
+    $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=true',function(data){
+        if(data.code == '0') {
+            alert(data.msg)
+        } else {
+            alert(data.msg)
+        }
+    },'json');
+})
+
+$('#btn_submit_not_pay').click(function(){
+    $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=false',function(data){
+        if(data.code == '0') {
+            alert(data.msg)
+        } else {
+            alert(data.msg)
+        }
+    },'json');
+})
+
+$("#btn_cancel").click(function(){ 
+    history.back();
+});
