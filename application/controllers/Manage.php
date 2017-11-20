@@ -25,6 +25,20 @@ class Manage extends CI_Controller {
         $this->load->view('V_footer');
     }
 
+
+    public function scoreProcess(){
+        
+    }
+
+    public function inpScore($id) {
+        $data["info"] =  $this->M_Registration->getList();
+        $data["list"] = $this->M_UserApply->getApplyList($id);
+        $this->load->view('V_header_manage');
+        $this->load->view('V_scoreInput',$data);
+        $this->load->view('V_footer');
+    } 
+
+    //繳費處理
     public function payProcess() {
         $arrID = $this->input->post('itemID');
         if(!count($arrID) > 0) {
@@ -47,7 +61,7 @@ class Manage extends CI_Controller {
         die(json_encode(array('code' => 1,'msg' => '更新成功！')));
     }
 
-    public function checkList($id) {
+    public function checkPay($id) {
         $data["info"] =  $this->M_Registration->getList();
         $data["list"] = $this->M_UserApply->getApplyList($id);
         $this->load->view('V_header_manage');

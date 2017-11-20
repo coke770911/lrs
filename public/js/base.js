@@ -205,6 +205,16 @@ $('#btn_submit_not_pay').click(function(){
     },'json');
 })
 
+$('#btn_submit_score').click(function(){
+    $.post("/lrs/Manage/scoreProcess",$('#formData').serialize()+'&pay=true',function(data){
+        if(data.code == '0') {
+            alert(data.msg)
+        } else {
+            alert(data.msg)
+        }
+    },'json');
+})
+
 $("#btn_cancel").click(function(){ 
     history.back();
 });

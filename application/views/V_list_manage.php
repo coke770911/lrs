@@ -27,9 +27,9 @@
                     echo "<td class='text-center'>".$row['rg_number']."</td>";
                     echo "<td class='text-center'>";
                     echo "<a class='btn btn-info btn_apply' href='/lrs/Manage/detailed/".$row['rg_id']."'>詳細</a>";
-                    echo "<a class='btn btn-default btn_apply' style='margin-left: 5px;margin-right: 5px;' href='/lrs/Manage/checkList/".$row['rg_id']."'>繳費處理</a>";
-                    echo "<a class='btn btn-default btn_apply' style='margin-left: 5px;margin-right: 5px;' href='/lrs/Manage/checkList/".$row['rg_id']."'>成績處理</a>";
-                    echo "<a class='btn btn-success btn_apply' target='_blank' download='excel' href='/lrs/Manage/exportList/".$row['rg_id']."'>名單匯出</a>";
+                    echo "<a class='btn btn-default' style='margin-left: 5px;margin-right: 5px;' href='/lrs/Manage/checkPay/".$row['rg_id']."'>繳費處理</a>";
+                    echo "<a class='btn btn-default' style='margin-left: 5px;margin-right: 5px;' href='/lrs/Manage/inpScore/".$row['rg_id']."'>成績處理</a>";
+                    echo "<a class='btn btn-success' target='_blank' download='excel' href='/lrs/Manage/exportList/".$row['rg_id']."'>名單匯出</a>";
                     echo "</td>";
                     echo "</tr>" ;
                 }

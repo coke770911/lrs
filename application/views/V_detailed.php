@@ -51,7 +51,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">備註說明</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3" style="height: 125px;" disabled><?php echo $rg["rg_memo"] ?></textarea>
+                <textarea class="form-control" rows="3" style="height: 200px;" disabled><?php echo $rg["rg_memo"] ?></textarea>
             </div>
         </div>
    

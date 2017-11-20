@@ -55,7 +55,7 @@ class M_UserApply extends CI_Model {
     }
 
     public function getEditData($rg_id,$std_no) {
-        $sql = "SELECT * FROM [Registration].[dbo].[Apply] WHERE ap_rg_id = ? AND ap_us_no = ?";
+        $sql = "SELECT * FROM [Registration].[dbo].[Apply] WHERE ap_rg_id = ? AND ap_us_no = ? AND ap_is_del = 0";
         $param = array($rg_id,$std_no);
         $query = $this->db->query($sql,$param);
         
