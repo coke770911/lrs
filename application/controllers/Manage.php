@@ -26,8 +26,20 @@ class Manage extends CI_Controller {
     }
 
 
-    public function scoreProcess(){
-        
+    public function scoreProcess() {
+        if(!count($this->input->post("score")) > 0) {
+            die(json_encode(array('code' => 0,'msg' => '尚無資料！')));
+        }
+
+        $ap_id_arr = $this->input->post("user_id");
+        foreach($this->input->post("score") AS $key => $val) {
+            $this->M_UserApply->getData($ap_id_arr[$key]);
+            $this->M_UserApply->setValue(array("ap_score" => $val));
+            if(!$this->M_UserApply->update() > 0) {
+                die(json_encode(array('code' => 0,'msg' => '更新失敗，請洽系統管理人員')));
+            }
+        }
+        die(json_encode(array('code' => 1,'msg' => '更新成績成功')));
     }
 
     public function inpScore($id) {

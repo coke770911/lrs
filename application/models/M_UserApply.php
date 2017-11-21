@@ -13,8 +13,6 @@ class M_UserApply extends CI_Model {
     private $ap_us_no = "";
     private $ap_us_sex = "";
     private $ap_us_cdept = "";
-    private $ap_us_grade = "";
-    private $ap_us_class = "";
     private $ap_us_phone = "";
     private $ap_us_email = "";
     private $ap_us_memo = "";

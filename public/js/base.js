@@ -206,7 +206,7 @@ $('#btn_submit_not_pay').click(function(){
 })
 
 $('#btn_submit_score').click(function(){
-    $.post("/lrs/Manage/scoreProcess",$('#formData').serialize()+'&pay=true',function(data){
+    $.post("/lrs/Manage/scoreProcess",$('#formData').serialize(),function(data){
         if(data.code == '0') {
             alert(data.msg)
         } else {
