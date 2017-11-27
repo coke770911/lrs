@@ -33,6 +33,9 @@ class Manage extends CI_Controller {
 
         $ap_id_arr = $this->input->post("user_id");
         foreach($this->input->post("score") AS $key => $val) {
+            if($val > 100) {
+                die(json_encode(array('code' => 0,'msg' => '分數輸入錯誤，請再確認。')));
+            }
             $this->M_UserApply->getData($ap_id_arr[$key]);
             $this->M_UserApply->setValue(array("ap_score" => $val));
             if(!$this->M_UserApply->update() > 0) {

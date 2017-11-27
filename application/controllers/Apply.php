@@ -176,7 +176,7 @@ class Apply extends CI_Controller {
 
         $applyData = $this->M_UserApply->getApplyNum(trim($this->input->post("rg_id")));
 
-        if( $applyData["countNum"] > $RegiData["rg_number"]) {
+        if($applyData["countNum"] > $RegiData["rg_number"]) {
             die(json_encode(array('code' => 0,'msg' => '報名人數已滿!')));
         }
        
