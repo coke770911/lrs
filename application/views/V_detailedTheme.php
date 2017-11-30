@@ -99,7 +99,9 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
+                <?php if(now() <= nice_date($rg['rg_applyEndDate'])) { ?>
                 <button type="button" id="btn_Theme_submit" class="btn btn-primary btn-lg btn-block">修改報名資訊</button>
+                <?php } ?>
                 <button type="button" id="btn_cancel" class="btn btn-danger btn-lg btn-block">回上一頁</button>
             </div>
             <div class="col-sm-4"></div>

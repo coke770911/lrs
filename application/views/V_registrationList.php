@@ -25,7 +25,11 @@
                     echo "<td class='text-center'>".nice_date($row['rg_applyEndDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".$row['rg_nowNumber']."</td>";
                     echo "<td class='text-center'>".$row['rg_number']."</td>";
-                    echo "<td class='text-center'><a class='btn btn-default btn_apply' href='/lrs/apply/applyData/".$row['rg_id']."'>報名</a></td>";
+                    if(now() <= nice_date($row['rg_applyEndDate'])) {
+                        echo "<td class='text-center'><a class='btn btn-default btn_apply' href='/lrs/apply/applyData/".$row['rg_id']."'>報名</a></td>";
+                    } else {
+                        echo "<td class='text-center'>報名結束</td>";
+                    }
                     echo "</tr>" ;
                 }
             }
