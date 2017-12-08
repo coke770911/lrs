@@ -33,9 +33,11 @@ class Manage extends CI_Controller {
 
         $ap_id_arr = $this->input->post("user_id");
         foreach($this->input->post("score") AS $key => $val) {
-            if($val > 100) {
-                die(json_encode(array('code' => 0,'msg' => '分數輸入錯誤，請再確認。')));
+
+            if(!is_numeric($val)) {
+                die(json_encode(array('code' => 0,'msg' => '分數輸入錯誤，請再確認輸入資料是否為數字。','erroe_row'=>$ap_id_arr[$key])));
             }
+
             $this->M_UserApply->getData($ap_id_arr[$key]);
             $this->M_UserApply->setValue(array("ap_score" => $val));
             if(!$this->M_UserApply->update() > 0) {
@@ -56,13 +58,23 @@ class Manage extends CI_Controller {
     //繳費處理
     public function payProcess() {
         $arrID = $this->input->post('itemID');
+
         if(!count($arrID) > 0) {
             die(json_encode(array('code' => 0,'msg' => '未勾選任何學生！')));
         }
 
         $pay = 1;
-        if($this->input->post('pay') == 'false') {
-            $pay = 0;
+
+        switch ($this->input->post('pay')) {
+            case '1':
+                $pay = 1;
+                break;
+            case '2':
+                $pay = 2;
+                break;
+            default:
+                $pay = 0;
+                break;
         }
 
         foreach($arrID AS $val) {
@@ -121,7 +133,7 @@ class Manage extends CI_Controller {
                 ->setCellValue( 'J'.$row, $val['ap_us_phone'])
                 ->setCellValue( 'K'.$row, $val['ap_us_email'])
                 ->setCellValue( 'L'.$row, $val['ap_is_regi'] == '0' ? '否' : '是')
-                ->setCellValue( 'M'.$row, $val['ap_is_pay'] == '0' ? '未繳費' : '已繳費');
+                ->setCellValue( 'M'.$row, $this->tools->getCheckPayType($val['ap_is_pay']));
             }
         }
 

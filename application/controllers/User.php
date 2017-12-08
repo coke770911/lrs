@@ -3,14 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller {
 
-    public function index()
-    {
-        
+    public function __construct() {
+        parent::__construct();
     }
 
-    public function userdata() {
-
-    }
     //初始化資料庫得來的資料寫進系統資料庫
     public function login() {
         $this->load->model("M_UserData");

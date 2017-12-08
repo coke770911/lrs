@@ -75,7 +75,7 @@ $('#btn_apply_edit_submit').click(function() {
         } else {
             alert(data.msg);
         }
-    },"json").fail(function(){
+    },"json").fail(function() {
         alert("發生錯誤！");
     });
 });
@@ -186,24 +186,39 @@ $('#chk_all_sel').change(function() {
 })
 
 $('#btn_submit_is_pay').click(function(){
-    $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=true',function(data){
+    $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=1',function(data){
         if(data.code == '0') {
             alert(data.msg)
         } else {
             alert(data.msg)
+            location.reload()
         }
     },'json');
 })
 
 $('#btn_submit_not_pay').click(function(){
-    $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=false',function(data){
+    $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=0',function(data){
         if(data.code == '0') {
             alert(data.msg)
         } else {
             alert(data.msg)
+            location.reload()
         }
     },'json');
 })
+
+
+$('#btn_submit_repay').click(function(){
+    $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=2',function(data){
+        if(data.code == '0') {
+            alert(data.msg) 
+        } else {
+            alert(data.msg)
+            location.reload()
+        }
+    },'json');
+})
+
 
 $('#btn_submit_score').click(function(){
     $.post("/lrs/Manage/scoreProcess",$('#formData').serialize(),function(data){
@@ -211,6 +226,7 @@ $('#btn_submit_score').click(function(){
             alert(data.msg)
         } else {
             alert(data.msg)
+            location.reload()
         }
     },'json');
 })

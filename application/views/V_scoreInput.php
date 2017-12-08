@@ -31,12 +31,8 @@
                         echo "<td class='text-left'>".$row['ap_us_ename']."</td>";
                         echo "<td class='text-center'>".$row['ap_us_id']."</td>";
                         echo "<td class='text-center'>".$row['ap_us_phone']."</td>";
-                        if($row['ap_is_pay'] == 0) {
-                            echo "<td class='text-center'>尚未繳費</td>";
-                        } else {
-                            echo "<td class='text-center'>已繳費</td>";
-                        }
-                        echo "<td class='text-center'><input type='text' style='width: 35px;' name='score[]' value='".$row['ap_score']."'><input type='hidden' name='user_id[]' value='".$row['ap_id']."'></td>";
+                        echo "<td class='text-center'>".$this->tools->getCheckPayType($row['ap_is_pay'])."</td>";
+                        echo "<td class='text-center'><input type='text' style='width: 50px;' name='score[]' value='".$row['ap_score']."'><input type='hidden' name='user_id[]' value='".$row['ap_id']."'></td>";
                         echo "</tr>" ;
                     }
                 } else {

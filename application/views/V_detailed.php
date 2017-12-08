@@ -149,7 +149,7 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <a href="/lrs/Apply/historyList" class="btn btn-danger btn-lg btn-block">回上頁</a>
+                <a class="btn btn-danger btn-lg btn-block" href="/lrs/Apply/historyList" style="margin-top: 5px;margin-bottom: 5px;">回上一頁</a>
             </div>
             <div class="col-sm-4"></div>
         </div>  

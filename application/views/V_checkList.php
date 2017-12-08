@@ -29,11 +29,7 @@
                         echo "<td class='text-center'>".$row['ap_us_id']."</td>";
                         echo "<td class='text-center'>".$row['ap_us_phone']."</td>";
                         echo "<td class='text-center'>".$row['ap_rg_money']."</td>";
-                        if($row['ap_is_pay'] == 0) {
-                            echo "<td class='text-center'>尚未繳費</td>";
-                        } else {
-                            echo "<td class='text-center'>已繳費</td>";
-                        }
+                        echo "<td class='text-center'>".$this->tools->getCheckPayType($row['ap_is_pay'])."</td>";
                         echo "<td class='text-center'><input class='itemCheck' name='itemID[]' type='checkbox' value='".$row['ap_id']."'></td>";
                         echo "</tr>" ;
                     }
@@ -47,6 +43,7 @@
         </table>   
         <div class='row'>
             <div class='col-xs-12 text-right'>
+                <button class='btn btn-warning' type="button" id="btn_submit_repay">退費</button>
                 <button class='btn btn-danger' type="button" id="btn_submit_not_pay">未繳費</button>
                 <button class='btn btn-primary' type="button" id="btn_submit_is_pay">已繳費</button>
             </div>

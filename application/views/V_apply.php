@@ -51,7 +51,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">備註說明</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3" style="height: 200px;" disabled><?php echo $rg["rg_memo"] ?></textarea>
+                <textarea class="form-control" rows="3" style="height: 250px;" disabled><?php echo $rg["rg_memo"] ?></textarea>
             </div>
         </div>
    
@@ -74,7 +74,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">英文姓名</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="英文姓名" name="e_name" value="<?php echo strtoupper($this->session->us_ename) ?>">
+                <input type="text" class="form-control" placeholder="英文姓名 格式例如：王小明 WANG,SIAO-MING(需全大寫)" name="e_name" value="<?php echo strtoupper($this->session->us_ename) ?>">
             </div>
         </div>
 
@@ -107,7 +107,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">行動電話</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="請輸入可連絡電話號碼" name="phone" value="<?php echo $this->session->us_phone ?>">
+                <input type="text" class="form-control" placeholder="例如：0910123456(請勿加入任何符號與空白)" name="phone" value="<?php echo $this->session->us_phone ?>">
             </div>
         </div>
 
@@ -131,10 +131,11 @@
                 </div>
             </div>
         <?php } ?>
+
         <div class="form-group">
             <label class="col-sm-2 control-label">備註</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="2" name="memo" maxlength="120"></textarea>
+                <textarea class="form-control" rows="2" name="memo" maxlength="120" placeholder="給予建議或者考場特殊需求"></textarea>
             </div>
         </div>
         <div class="row">
@@ -147,7 +148,7 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button type="button" class="btn btn-danger btn-lg btn-block" onclick"location.replace('/lrs')">回上一頁</button>
+                <a class="btn btn-danger btn-lg btn-block" href="/lrs/Apply/historyList" style="margin-top: 5px;margin-bottom: 5px;">回上一頁</a>
             </div>
             <div class="col-sm-4"></div>
         </div>  

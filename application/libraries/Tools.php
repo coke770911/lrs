@@ -88,6 +88,20 @@ class Tools {
         return $numOut;
     }
 
+    function getCheckPayType($val) {
+        switch ($val) {
+            case '1':
+                return '已繳費';
+                break;
+            case '2':
+                return '退費';
+                break;
+            default:
+                return '尚未繳費';
+                break;
+        }
+    }
+
     function __destruct() { }
 
 }

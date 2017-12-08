@@ -4,7 +4,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th class="text-center">#</th>
+                <th class="text-center" width="4%">#</th>
                 <th class="text-center">證照名稱</th>
                 <th class="text-center">考試時間</th>
                 <th class="text-center">報名截止日</th>
@@ -16,10 +16,9 @@
         <tbody>
         <?php 
             if(count($list) > 0 ) {
-                $i = 1;
                 foreach($list as $row) {
                     echo "<tr>" ;
-                    echo "<td class='text-center'>".$i++."</td>";
+                    echo "<td class='text-center'>".$row['rg_id']."</td>";
                     echo "<td class='text-center'>".$row['rg_name']."</td>";
                     echo "<td class='text-center'>".nice_date($row['rg_startDate'], 'Y-m-d H:i')." ~ ".nice_date($row['rg_endDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".nice_date($row['rg_applyEndDate'], 'Y-m-d H:i')."</td>";

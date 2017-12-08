@@ -4,7 +4,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th class="text-center" width="2%">#</th>
+                <th class="text-center" width="4%">#</th>
                 <th class="text-center">證照名稱</th>
                 <th class="text-center" width="24%">考試時間</th>
                 <th class="text-center" width="12%">報名截止日</th>
@@ -16,10 +16,9 @@
         <tbody>
         <?php 
             if(count($list) > 0 ) {
-                $i = 1;
                 foreach($list as $row) {
                     echo "<tr>" ;
-                    echo "<td class='text-center'>".$i++."</td>";
+                    echo "<td class='text-center'>".$row['rg_id']."</td>";
                     echo "<td class='text-center'>".$row['rg_name']."</td>";
                     echo "<td class='text-center'>".nice_date($row['rg_startDate'], 'Y-m-d H:i')." ~ ".nice_date($row['rg_endDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".nice_date($row['rg_applyEndDate'], 'Y-m-d H:i')."</td>";
@@ -28,9 +27,7 @@
                     echo "<td class='text-center'>";
                     echo "<a class='btn btn-info btn_apply' href='/lrs/Manage/detailed/".$row['rg_id']."' style='margin-right: 5px;'>詳細</a>";
                     echo "<a class='btn btn-primary' style='margin-right: 5px;' href='/lrs/Manage/checkPay/".$row['rg_id']."'>繳費處理</a>";
-
-                    echo "<a class='btn btn-warning' style='margin-right: 5px;' href='/lrs/Manage/inpScore/".$row['rg_id']."'>成績處理</a>";
-                    
+                    echo "<a class='btn btn-warning' style='margin-right: 5px;' href='/lrs/Manage/inpScore/".$row['rg_id']."'>成績處理</a>";                   
                     echo "<a class='btn btn-success' style='margin-right: 5px;' target='_blank' download='excel' href='/lrs/Manage/exportList/".$row['rg_id']."'>名單匯出</a>";
                     echo "</td>";
                     echo "</tr>" ;

@@ -27,11 +27,7 @@
                     echo "<td class='text-center'>".nice_date($row['rg_startDate'], 'Y-m-d H:i')." ~ ".nice_date($row['rg_endDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".nice_date($row['rg_applyEndDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".number_format($row['ap_rg_money'])."</td>";
-                    if($row['ap_is_pay'] == 0) {
-                            echo "<td class='text-center'>尚未繳費</td>";
-                    } else {
-                        echo "<td class='text-center'>已繳費</td>";
-                    }
+                    echo "<td class='text-center'>".$this->tools->getCheckPayType($row['ap_is_pay'])."</td>";
                     if($row['ap_score'] == -1) {
                         echo "<td class='text-center'>尚未輸入</td>";
                     } else {
