@@ -35,6 +35,9 @@ class User extends CI_Controller {
         if(count($acc_temp) === 1) {
             $account = $username;
             $this->session->admin = 0;
+            if(in_array($account, $this->tools->getAdminArr())) { 
+                $this->session->manage = 1;
+            }
         } else {
             $username = $acc_temp[0];
             $account = $acc_temp[1];
@@ -60,13 +63,14 @@ class User extends CI_Controller {
             }
             $this->session->set_userdata($UserData);
            
-            
+            /*
             if($this->session->us_logid == "STAFF") {
                 if(!in_array($this->session->us_no, $this->tools->getAdminArr())) {
                     $this->session->sess_destroy();
                     die(json_encode(array('code' => 0,'msg' => '請勿使用不合法方式登入系統！！')));
                 }
             }
+            */
 
             $this->session->login = '1';
             $re = json_encode(array('code' => 1,'msg' => '登入成功!'));

@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>成績處理<small>(預設-1代表成績尚未輸入)</small></h1>
+    <h1>成績處理<small class="hidden-print">(成績欄位最多輸入5個中文字)</small></h1>
     <hr>
     <form id="formData" name="formData" method="post">
         <table class="table table-striped">
@@ -7,9 +7,9 @@
                 <tr>
                     <th class="text-center">#</th>
                     <th class="text-center">證照名稱</th>
-                    <th class="text-center">系所班</th>
+                    <th class="text-center" style="width: 16%;">系所班</th>
                     <th class="text-center">學號</th>
-                    <th class="text-center">姓名</th>
+                    <th class="text-center" style="width: 6%;">姓名</th>
                     <th class="text-center">英文姓名</th>
                     <th class="text-center">身分證字號</th>
                     <th class="text-center">連絡電話</th>
@@ -45,7 +45,7 @@
         </table>   
         <div class='row'>
             <div class='col-xs-12 text-right'>
-                <button class='btn btn-danger' type="button" id="btn_submit_score">更新成績</button>
+                <button class='btn btn-danger hidden-print' type="button" id="btn_submit_score">更新成績</button>
             </div>
         </div>
     </form>

@@ -8,9 +8,7 @@ $('#login').click(function(){
             location.reload();
         } else {
             alert(data.msg);
-        }
-        
-        
+        }     
     },"json").fail(function(){
         alert("發生錯誤！");
     });
@@ -185,6 +183,20 @@ $('#chk_all_sel').change(function() {
     
 })
 
+$("#btn_submit_cancel_apply").click(function(){ 
+    if(confirm('取消報名後，被取消報名資料無法在系統查詢，是否要繼續？')) {
+        $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=3',function(data){
+            if(data.code == '0') {
+                alert(data.msg)
+            } else {
+                alert(data.msg)
+                location.reload()
+            }
+        },'json');
+    }
+});
+
+
 $('#btn_submit_is_pay').click(function(){
     $.post("/lrs/Manage/payProcess",$('#formData').serialize()+'&pay=1',function(data){
         if(data.code == '0') {
@@ -234,3 +246,5 @@ $('#btn_submit_score').click(function(){
 $("#btn_cancel").click(function(){ 
     history.back();
 });
+
+

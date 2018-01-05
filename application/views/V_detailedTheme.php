@@ -93,13 +93,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">備註說明</label>
             <div class="col-sm-10">
-                <textarea class="form-control" style="height: 200px;" rows="3" name="rg_memo"><?php echo $rg["rg_memo"] ?></textarea>
+                <textarea class="form-control" style="height: 280px;" rows="3" name="rg_memo"><?php echo $rg["rg_memo"] ?></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <?php if(now() <= nice_date($rg['rg_applyEndDate'])) { ?>
+                <?php if(now() <= nice_date($rg['rg_endDate'])) { ?>
                 <button type="button" id="btn_Theme_submit" class="btn btn-primary btn-lg btn-block">修改報名資訊</button>
                 <?php } ?>
                 <button type="button" id="btn_cancel" class="btn btn-danger btn-lg btn-block">回上一頁</button>

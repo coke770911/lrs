@@ -7,9 +7,8 @@ class Tools {
     }
 
     public function getAdminArr() {
-        $adminArr = array("fz083","fa016","ot113");
+        $adminArr = array("fz083","ot088","fa016","ot113","davidchio");
         return $adminArr;
-
     }
 
    function num2Zh( $numInp ) {
@@ -67,8 +66,7 @@ class Tools {
         }
         else if( $tmp > 0 && $num === '0'  ) {
             $numOut .= '零';
-        }
-        
+        }   
         $count++;
     }
 
@@ -80,7 +78,6 @@ class Tools {
 
     //-- 去除尾數的 "零"
     function trimLastZero( $numOut ) {
-        
         $final_str = mb_strlen( $numOut, 'UTF-8' ) - 1;
         if( mb_substr( $numOut, $final_str, 1, 'UTF-8' ) == '零' ) {
             $numOut = mb_substr( $numOut, 0, $final_str, 'UTF-8' );

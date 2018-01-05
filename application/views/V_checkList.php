@@ -43,6 +43,7 @@
         </table>   
         <div class='row'>
             <div class='col-xs-12 text-right'>
+                <button class='btn btn-danger' type="button" id="btn_submit_cancel_apply">取消報名</button>
                 <button class='btn btn-warning' type="button" id="btn_submit_repay">退費</button>
                 <button class='btn btn-danger' type="button" id="btn_submit_not_pay">未繳費</button>
                 <button class='btn btn-primary' type="button" id="btn_submit_is_pay">已繳費</button>

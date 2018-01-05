@@ -18,7 +18,7 @@ class M_UserApply extends CI_Model {
     private $ap_us_memo = "";
     private $ap_is_regi = "";
     private $ap_is_del = 0;
-    private $ap_score = -1;
+    private $ap_score = '未輸入';
     private $ap_is_pay = 0;
 
 

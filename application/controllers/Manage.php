@@ -17,14 +17,12 @@ class Manage extends CI_Controller {
         
     }
 
-
     public function index() {
         $data["list"] =  $this->M_Registration->getList();
         $this->load->view('V_header_manage');
         $this->load->view('V_list_manage',$data);
         $this->load->view('V_footer');
     }
-
 
     public function scoreProcess() {
         if(!count($this->input->post("score")) > 0) {
@@ -33,10 +31,6 @@ class Manage extends CI_Controller {
 
         $ap_id_arr = $this->input->post("user_id");
         foreach($this->input->post("score") AS $key => $val) {
-
-            if(!is_numeric($val)) {
-                die(json_encode(array('code' => 0,'msg' => '分數輸入錯誤，請再確認輸入資料是否為數字。','erroe_row'=>$ap_id_arr[$key])));
-            }
 
             $this->M_UserApply->getData($ap_id_arr[$key]);
             $this->M_UserApply->setValue(array("ap_score" => $val));
@@ -64,13 +58,17 @@ class Manage extends CI_Controller {
         }
 
         $pay = 1;
-
+        $is_del = 0;
         switch ($this->input->post('pay')) {
             case '1':
                 $pay = 1;
                 break;
             case '2':
                 $pay = 2;
+                break;
+            case '3':
+                $pay = 0;
+                $is_del = 1;
                 break;
             default:
                 $pay = 0;
@@ -79,7 +77,11 @@ class Manage extends CI_Controller {
 
         foreach($arrID AS $val) {
             $this->M_UserApply->getdata($val);
-            $this->M_UserApply->setValue(array('ap_is_pay' => $pay));
+            $this->M_UserApply->setValue(array(
+                'ap_is_pay' => $pay,
+                'ap_is_del' => $is_del
+            ));
+
             $re = $this->M_UserApply->update();
             if(!$re > 0) {
                 die(json_encode(array('code' => 0,'msg' => '更新失敗！')));
@@ -115,7 +117,8 @@ class Manage extends CI_Controller {
         ->setCellValue( 'J1', '行動電話')
         ->setCellValue( 'K1', '電子郵件')
         ->setCellValue( 'L1', '官網註冊')
-        ->setCellValue( 'M1', '是否繳費');
+        ->setCellValue( 'M1', '是否繳費')
+        ->setCellValue( 'N1', '成績');
         if(count($data) > 0) {
             $base_row = 2;
             foreach($data AS $key => $val) {
@@ -133,7 +136,8 @@ class Manage extends CI_Controller {
                 ->setCellValue( 'J'.$row, $val['ap_us_phone'])
                 ->setCellValue( 'K'.$row, $val['ap_us_email'])
                 ->setCellValue( 'L'.$row, $val['ap_is_regi'] == '0' ? '否' : '是')
-                ->setCellValue( 'M'.$row, $this->tools->getCheckPayType($val['ap_is_pay']));
+                ->setCellValue( 'M'.$row, $this->tools->getCheckPayType($val['ap_is_pay']))
+                ->setCellValue( 'N'.$row, $val['ap_score']);
             }
         }
 

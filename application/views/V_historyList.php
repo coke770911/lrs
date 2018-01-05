@@ -27,12 +27,8 @@
                     echo "<td class='text-center'>".nice_date($row['rg_startDate'], 'Y-m-d H:i')." ~ ".nice_date($row['rg_endDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".nice_date($row['rg_applyEndDate'], 'Y-m-d H:i')."</td>";
                     echo "<td class='text-center'>".number_format($row['ap_rg_money'])."</td>";
-                    echo "<td class='text-center'>".$this->tools->getCheckPayType($row['ap_is_pay'])."</td>";
-                    if($row['ap_score'] == -1) {
-                        echo "<td class='text-center'>尚未輸入</td>";
-                    } else {
-                        echo "<td class='text-center'>".$row['ap_score']."</td>";
-                    }
+                    echo "<td class='text-center'>".$this->tools->getCheckPayType($row['ap_is_pay'])."</td>";                   
+                    echo "<td class='text-center'>".$row['ap_score']."</td>";
                     echo "<td class='text-center'>";
                     echo "<a class='btn btn-info' style='margin-right: 5px;' href='/lrs/Apply/Detailed/".$row['rg_id']."'>詳細</a>";
 
