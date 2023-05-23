@@ -12,7 +12,7 @@ class Apply extends CI_Controller {
 
     public function applyData($id) {
         if($this->session->login == NULL) {
-            die("<script>alert('請先登入之後再進行報名動作！');window.history.go(-1)</script>");
+            die("<script>alert('請先登入之後再進行報名動作!');window.history.go(-1)</script>");
         }
 
         $data["rg"] = $this->M_Registration->getData($id);
@@ -35,12 +35,26 @@ class Apply extends CI_Controller {
         $data["numArr"] = $numArr;
         $data["rg"] = $this->M_Registration->getData($id);
         $this->load->view('V_depositSlip',$data);
+    }
 
+	
+    public function ManagePrintPay($id,$stdno) {
+        $data["apply_data"] = $this->M_UserApply->getEditData($id,$stdno);
+        #陣列金錢填入
+        $numStr = $data["apply_data"]["ap_rg_money"];
+        $numArr = array_reverse(preg_split('//', $numStr, -1, PREG_SPLIT_NO_EMPTY));
+        $numArr[] = "$";
+        for($i = count($numArr); $i <= 10; $i++) {
+            $numArr[$i] = "";
+        }
+        $data["numArr"] = $numArr;
+        $data["rg"] = $this->M_Registration->getData($id);
+        $this->load->view('V_depositSlip',$data);
     }
 
     public function editProcess() {
         if($this->session->login == NULL || $this->session->login == '') {
-            die(json_encode(array('code' => 0,'msg' => '請先登入之後再進行報名動作！!')));
+            die(json_encode(array('code' => 0,'msg' => '請先登入之後再進行報名動作!!')));
         }
 
         if(trim($this->input->post("rg_id")) == "") {
@@ -176,7 +190,7 @@ class Apply extends CI_Controller {
 
         $applyData = $this->M_UserApply->getApplyNum(trim($this->input->post("rg_id")));
 
-        if( $applyData["countNum"] > $RegiData["rg_number"]) {
+        if($applyData["countNum"] >= $RegiData["rg_number"]) {
             die(json_encode(array('code' => 0,'msg' => '報名人數已滿!')));
         }
        

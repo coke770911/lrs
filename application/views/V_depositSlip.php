@@ -80,7 +80,7 @@
 
         <table class="bankTable">
             <td colspan="17" style="border: 1px solid #FFF;border-bottom: 1px solid #000;">
-                <img src="/lrs/public/images/feib.png" height="50">
+                <img src="/public/images/feib.png" height="50">
                 <div width="100%" class="smallText" style="text-align:right;" >
                     年&nbsp&nbsp&nbsp&nbsp&nbsp月&nbsp&nbsp&nbsp&nbsp&nbsp日
                 </div>
@@ -105,7 +105,7 @@
                     戶<BR>名
                 </td>
                 <td rowspan="2" class="leftText" style="font-size:20px;font-weight: bold;">
-                    亞東技術學院
+                    亞東學校財團法人亞東科技大學
                 </td>
                 <td rowspan="2" style="width:20px;border: 1px solid #FFF;border-left: 1px solid #000;" >
                     第一聯
@@ -352,7 +352,7 @@
     <table class="receiptTable" >
         <tr >
             <td colspan="4" class="leftText" style="border: 1px solid #FFF;border-bottom: 1px solid #000;">
-                亞東技術學院　　收款收據
+                亞東學校財團法人亞東科技大學　　繳款收據
             </td>
 
         </tr>
@@ -384,8 +384,7 @@
                 項目
             </td>
             <td colspan="2" class="leftText">
-                代收<?php echo $apply_data["ap_rg_name"] ?><br>
-                「<?php echo $apply_data["ap_le_name"] ?>」證照認證考試報名費
+                代收「<?php echo $apply_data["ap_rg_name"] ?>-<?php echo $apply_data["ap_le_name"] ?>」證照認證考試報名費
             </td>
         </tr>
         <tr >
@@ -396,7 +395,7 @@
     </table>
     <BR>
     <div style="font-family:標楷體;">
-        校長：黃茂全　　　主辦會計：潘明岳　　　主辦出納：馮靜芳　　　經收人：
+        
     </div>
     <BR>
     <div style="text-align:right;color:#FF0000">

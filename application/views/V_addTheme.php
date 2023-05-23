@@ -7,6 +7,8 @@
             <div class="col-sm-10">
                 <label class="control-label" >
                    <input type="text" class="form-control" name="rg_name">  
+                   <input type="hidden" name="rg_id" value="0">
+                   <input type="hidden" name="rg_mode" value="新增">
                 </label>
             </div>
         </div>
@@ -16,16 +18,17 @@
             <div class="col-sm-3">
                 <select class="form-control" id="sel_lg_group">
                     <option value="0">--請選擇證照分類--</option>
-                    <option value="1">PMA (National Project Management Association)</option>
-                    <option value="2">ERP (Chinese Enterprise Resource Planning Society)</option>
+                    <option value="1">PMA (Project Management Association)</option>
+                    <option value="2">ERP (Enterprise Resource Planning)</option>
                     <option value="3">ACA (Adobe Certified Associate)</option>
                     <option value="4">SSE (Silicon Stone Edcation)</option>
                     <option value="5">IC3 (Internet and Computing Core Certifications)</option>
                     <option value="6">MTA (Microsoft Technology Associate)</option>
                     <option value="7">TQC企業人才技能認證</option>
                     <option value="8">TQC+專業設計人才認證</option>
-                    <option value="9">EEC企業電子化人才能力鑑定</option>
+                    <option value="9">TQC/EEC企業電子化人才能力鑑定</option>
                     <option value="10">ITE資訊專業人員鑑定</option>
+                    <option value="12">ITS 國際認證考試</option>
                     <option value="11">其他</option>
                 </select>
             </div>
@@ -95,22 +98,16 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">備註說明</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3" name="rg_memo"></textarea>
+                <textarea class="form-control" rows="3" style="height: 200px;" name="rg_memo"></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <button type="button" id="btn_addTheme_submit" class="btn btn-primary btn-lg btn-block">送出報名資料</button>
+                <button type="button" id="btn_Theme_submit" class="btn btn-primary btn-lg btn-block">新增報名資訊</button>
+                <button type="button" id="btn_cancel" class="btn btn-danger btn-lg btn-block">回上一頁</button>
             </div>
             <div class="col-sm-4"></div>
         </div>
-        <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4">
-                <button type="button" id="btn_cancel" class="btn btn-danger btn-lg btn-block">取消報名</button>
-            </div>
-            <div class="col-sm-4"></div>
-        </div>  
     </form>
 </div>

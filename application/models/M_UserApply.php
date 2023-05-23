@@ -13,15 +13,14 @@ class M_UserApply extends CI_Model {
     private $ap_us_no = "";
     private $ap_us_sex = "";
     private $ap_us_cdept = "";
-    private $ap_us_grade = "";
-    private $ap_us_class = "";
     private $ap_us_phone = "";
     private $ap_us_email = "";
     private $ap_us_memo = "";
     private $ap_is_regi = "";
     private $ap_is_del = 0;
-    private $ap_score = -1;
+    private $ap_score = '未輸入';
     private $ap_is_pay = 0;
+    private $ap_scorePass = 0;
 
 
     public function __construct() {
@@ -35,7 +34,12 @@ class M_UserApply extends CI_Model {
     }
 
     public function getApplyList($rg_id) {
-        $sql = "SELECT * FROM [Registration].[dbo].[Apply] LEFT JOIN [Registration].[dbo].[Registration] ON [ap_rg_id] = [rg_id] WHERE ap_rg_id = ? AND ap_is_del = 0";
+        $sql = "SELECT * FROM [Registration].[dbo].[Apply] 
+                LEFT JOIN [Registration].[dbo].[Registration] ON [ap_rg_id] = [rg_id] 
+                LEFT JOIN [Registration].[dbo].[UserData] ON us_no = ap_us_no 
+                WHERE ap_rg_id = ? AND ap_is_del = 0
+                ORDER BY [ap_us_no]";
+                
         $param = array($rg_id);
         $query = $this->db->query($sql,$param);
         if ($query->num_rows() > 0) {
@@ -55,7 +59,7 @@ class M_UserApply extends CI_Model {
     }
 
     public function getEditData($rg_id,$std_no) {
-        $sql = "SELECT * FROM [Registration].[dbo].[Apply] WHERE ap_rg_id = ? AND ap_us_no = ?";
+        $sql = "SELECT * FROM [Registration].[dbo].[Apply] WHERE ap_rg_id = ? AND ap_us_no = ? AND ap_is_del = 0";
         $param = array($rg_id,$std_no);
         $query = $this->db->query($sql,$param);
         
@@ -135,7 +139,10 @@ class M_UserApply extends CI_Model {
                 ap_is_regi = ?,
                 ap_is_del = ?,
                 ap_score = ? ,
-                ap_is_pay = ? WHERE ap_id = ?";
+                ap_is_pay = ?, 
+                ap_scorePass = ?,
+                ap_modifyDate = getdate()
+                WHERE ap_id = ?";
 
         $param = array(
                 $this->ap_rg_id ,
@@ -155,6 +162,7 @@ class M_UserApply extends CI_Model {
                 $this->ap_is_del ,
                 $this->ap_score ,
                 $this->ap_is_pay,
+                $this->ap_scorePass,
                 $this->ap_id
                 );
         $this->db->query($sql,$param);

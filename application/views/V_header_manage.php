@@ -8,8 +8,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>證照考試報名系統</title>
-    <link href="/lrs/public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/lrs/public/css/layout.css" rel="stylesheet">
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/public/css/layout.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -29,13 +29,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                       </button>
-                      <a class="navbar-brand" href="/lrs">證照考試報名系統</a>
+                      <a class="navbar-brand" href="/">證照考試報名系統</a>
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
                         <ul class="nav navbar-nav">
-                            <li><a href="/lrs/Manage">證照考試列表</a></li>
-                            <li><a href="/lrs/Manage/addTheme">新增證照考試</a></li>
-                            <li><a href="/lrs/Manage/addItem">新增證照考試選項</a></li>
+                            <li><a href="/Manage">證照考試列表</a></li>
+                            <li><a href="/Manage/addTheme">新增證照考試</a></li>
+                            <li><a href="/Manage/addItem">新增證照考試選項</a></li>
                         </ul>
                         <?php if($this->session->login === '1') { ?>
                         <form class="navbar-form navbar-right" id="logoutform" name="logoutform" method="POST" action="User/logout">

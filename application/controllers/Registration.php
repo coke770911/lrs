@@ -12,12 +12,12 @@ class Registration extends CI_Controller {
 
     public function index()
     {
-        $data["list"] =  $this->M_Registration->getList();
-        if($this->session->us_logid == null || $this->session->us_logid != "STAFF") {
+        $data["list"] =  $this->M_Registration->getNowList();
+        if($this->session->manage == 1) {
+             $this->load->view('V_header_manage');
+        } else {
             $this->load->view('V_header');
             $this->load->view('V_registrationList',$data);
-        } else {
-            $this->load->view('V_header_manage');
         }
         $this->load->view('V_footer');
     }

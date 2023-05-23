@@ -2,22 +2,20 @@
 $('#login').click(function(){
     $uid = $("input[name=username]").val();
     $pwd = $("input[name=password]").val();
-    $.post("/lrs/User/login",{"username":$uid,"password":$pwd},function(data){
+    $.post("/User/login",{"username":$uid,"password":$pwd},function(data){
         if(data.code != '0') {
             alert(data.msg);
             location.reload();
         } else {
             alert(data.msg);
-        }
-        
-        
+        }     
     },"json").fail(function(){
         alert("發生錯誤！");
     });
 });
 
 $('#logout').click(function(){
-    $.getJSON("/lrs/User/logout","",function(data) {
+    $.getJSON("/User/logout","",function(data) {
         if(data.code != '0') {
             alert(data.msg);
             location.reload();
@@ -31,10 +29,10 @@ $('#logout').click(function(){
 });
 
 $('#btn_apply_submit').click(function() {
-    $.post("/lrs/Apply/addProcess",$('#formData').serialize(),function(data){
+    $.post("/Apply/addProcess",$('#formData').serialize(),function(data){
         if(data.code != '0') {
             alert(data.msg);
-            location.replace("/lrs/Apply/historyList");
+            location.replace("/Apply/historyList");
         } else {
             alert(data.msg);
         }
@@ -52,7 +50,7 @@ $('.btn_apply_cancel').click(function() {
     }
 
     if(confirm("請再次確認是否取消報名")) {
-        $.post("/lrs/Apply/cancel",{id:$id},function(data) {
+        $.post("/Apply/cancel",{id:$id},function(data) {
             if(data.code != '0') {
                 alert(data.msg);
                 location.reload();
@@ -68,20 +66,20 @@ $('.btn_apply_cancel').click(function() {
 });
 
 $('#btn_apply_edit_submit').click(function() {
-    $.post("/lrs/Apply/editProcess",$('#formData').serialize(),function(data){
+    $.post("/Apply/editProcess",$('#formData').serialize(),function(data){
         if(data.code != '0') {
             alert(data.msg);
-            location.replace("/lrs/Apply/historyList");
+            location.replace("/Apply/historyList");
         } else {
             alert(data.msg);
         }
-    },"json").fail(function(){
+    },"json").fail(function() {
         alert("發生錯誤！");
     });
 });
 
 $('#btn_addItem_submit').click(function(){
-    $.post("/lrs/Manage/addItemProcess",$('#formData').serialize(),function(data){
+    $.post("/Manage/addItemProcess",$('#formData').serialize(),function(data){
         if(data.code != '0') {
             alert(data.msg);
             location.reload();
@@ -94,15 +92,11 @@ $('#btn_addItem_submit').click(function(){
     });
 })
 
-
-
-
-
-$('#btn_addTheme_submit').click(function() {
-    $.post("/lrs/Manage/addThemeProcess",$('#formData').serialize(),function(data){
+$('#btn_Theme_submit').click(function() {
+    $.post("/Manage/ThemeProcess",$('#formData').serialize(),function(data){
        if(data.code != '0') {
             alert(data.msg);
-            location.href = "/lrs/Manage/"
+            location.href = "/Manage/"
         } else {
             alert(data.msg);
         }
@@ -123,7 +117,7 @@ $('input[name=rg_money]').keyup(function () {
 //控制Item呈現
 $('#sel_lg_group').change(function(){
     $this = $(this);
-    $('#lg_item').load('/lrs/Manage/selItem/'+$this.val());
+    $('#lg_item').load('/Manage/selItem/'+$this.val());
 })
 
 //控制選項New Add
@@ -146,7 +140,7 @@ $('#btn_addItem').click(function(){
     var $div = $('<div class="row">').append($div_radio);
 
     var chkVal = true;
-    $('.chKSelVal').each(function(){
+    $('.chKSelVal').each(function() {
         $this = $(this);
         if($this.val() == $tag_element.val()) {
             chkVal = false;
@@ -158,18 +152,99 @@ $('#btn_addItem').click(function(){
 })
 
 
-$("#itemContent").on("click",'.glyphicon-remove',function(){
+$("#itemContent").on("click",'.glyphicon-remove',function() {
     $this = $(this);
     $this.parents('.row').remove();
 })
 
-$(function(){
+$(function() {
     $('.datainput').appendDtpicker({
         "closeOnSelected": true
     });
 });
 
-$("#lg_item_check").click(function(){
+$("#lg_item_check").click(function() {
     $this = $(this);
-    $('#item_check_list').load('/lrs/Manage/selItem/'+$this.val());
+    $('#item_check_list').load('/Manage/selItem/'+$this.val());
 })
+
+
+$('#chk_all_sel').change(function() {
+    if($('#chk_all_sel:checked').length > 0) {
+        $('.itemCheck').each(function() {
+            $(this).prop('checked',true);
+        })
+        
+    } else {
+        $('.itemCheck').each(function() {
+            $(this).prop('checked',false);
+        })
+    }
+    
+})
+
+$("#btn_submit_cancel_apply").click(function(){ 
+    if(confirm('取消報名後，被取消報名資料無法在系統查詢，是否要繼續？')) {
+        $.post("/Manage/payProcess",$('#formData').serialize()+'&pay=3',function(data){
+            if(data.code == '0') {
+                alert(data.msg)
+            } else {
+                alert(data.msg)
+                location.reload()
+            }
+        },'json');
+    }
+});
+
+
+$('#btn_submit_is_pay').click(function(){
+    $.post("/Manage/payProcess",$('#formData').serialize()+'&pay=1',function(data){
+        if(data.code == '0') {
+            alert(data.msg)
+        } else {
+            alert(data.msg)
+            location.reload()
+        }
+    },'json');
+})
+
+$('#btn_submit_not_pay').click(function(){
+    $.post("/Manage/payProcess",$('#formData').serialize()+'&pay=0',function(data){
+        if(data.code == '0') {
+            alert(data.msg)
+        } else {
+            alert(data.msg)
+            location.reload()
+        }
+    },'json');
+})
+
+
+$('#btn_submit_repay').click(function(){
+    $.post("/Manage/payProcess",$('#formData').serialize()+'&pay=2',function(data){
+        if(data.code == '0') {
+            alert(data.msg) 
+        } else {
+            alert(data.msg)
+            location.reload()
+        }
+    },'json');
+})
+
+
+$('#btn_submit_score').click(function(){
+    $.post("/Manage/scoreProcess",$('#formData').serialize(),function(data){
+        if(data.code == '0') {
+            alert(data.msg)
+        } else {
+            alert(data.msg)
+            location.reload()
+        }
+    },'json');
+})
+
+$("#btn_cancel").click(function(){ 
+    history.back();
+});
+
+

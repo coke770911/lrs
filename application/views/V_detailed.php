@@ -51,7 +51,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">備註說明</label>
             <div class="col-sm-10">
-                <textarea class="form-control" rows="3" disabled></textarea>
+                <textarea class="form-control" rows="3" style="height: 200px;" disabled><?php echo $rg["rg_memo"] ?></textarea>
             </div>
         </div>
    
@@ -149,7 +149,7 @@
         <div class="row">
             <div class="col-sm-4"></div>
             <div class="col-sm-4">
-                <a href="/lrs/Apply/historyList" class="btn btn-danger btn-lg btn-block">回上頁</a>
+                <a class="btn btn-danger btn-lg btn-block" href="/Apply/historyList" style="margin-top: 5px;margin-bottom: 5px;">回上一頁</a>
             </div>
             <div class="col-sm-4"></div>
         </div>  
