@@ -33,7 +33,7 @@
                         echo "<td class='text-center'>".$row['ap_us_phone']."</td>";
                         echo "<td class='text-right'>". number_format($row['ap_rg_money'], 0) ."</td>";
                         echo "<td class='text-center'>".$this->tools->getCheckPayType($row['ap_is_pay'])."</td>";
-						echo "<td class='text-center'><a class='btn btn-info' style='margin-right: 5px;' target='_blank' href='/Apply/ManagePrintPay/".$row['ap_rg_id']."/".$row['ap_us_no']."'>列印繳費單</a></td>";
+						echo "<td class='text-center'><a class='btn btn-info' target='_blank' href='/Apply/ManagePrintPay/".$row['ap_rg_id']."/".$row['ap_us_no']."'>列印</a></td>";
                         echo "<td class='text-center hidden-print'><input class='itemCheck' name='itemID[]' type='checkbox' value='".$row['ap_id']."'></td>";
                         echo "</tr>" ;
 
