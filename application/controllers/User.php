@@ -48,16 +48,7 @@ class User extends CI_Controller {
             $this->session->admin = 1;
         }
 
-        /*
-        $account .= "@acc.ad"; 
-        $ad = ldap_connect("120.96.33.15"); 
-        ldap_set_option($ad, LDAP_OPT_PROTOCOL_VERSION, 3);
-        ldap_set_option($ad, LDAP_OPT_REFERRALS, 0);
-        $user_info = @ldap_bind($ad,$account, $password);
-        $code = ldap_errno($ad);
-        */
-
-        $client = new SoapClient("http://info.aeust.edu.tw/authad/auth.asmx?WSDL");
+        $client = new SoapClient("https://info.aeust.edu.tw/authad/auth.asmx?WSDL");
         try
         {
             $result = $client->GetOITAuthenticationConnect(array("Account" => $account,"Password" => $password));
@@ -74,38 +65,9 @@ class User extends CI_Controller {
             }
             
         }
-        catch(SoapFault $err)
-        {
+        catch(SoapFault $err) {
             die(json_encode(array('code' => 0,'msg' => '系統認證出現錯誤，請聯絡圖資中心！')));
         }
-
-        /*
-        if ($code == 0) {
-            $UserData = $this->M_UserData->getUserData($username);
-            if($UserData == "") {
-                $re = json_encode(array('code' => 0,'msg' => '找不到您的資料！'));
-                die($re);
-            }
-            $this->session->set_userdata($UserData);
-           
-            /*
-            if($this->session->us_logid == "STAFF") {
-                if(!in_array($this->session->us_no, $this->tools->getAdminArr())) {
-                    $this->session->sess_destroy();
-                    die(json_encode(array('code' => 0,'msg' => '請勿使用不合法方式登入系統！！')));
-                }
-            }
-            
-
-            $this->session->login = '1';
-            $re = json_encode(array('code' => 1,'msg' => '登入成功!'));
-            die($re);
-        } else {
-            $this->session->sess_destroy();
-            die(json_encode(array('code' => 0,'msg' => '登入失敗!請再次檢查的您的學號與密碼，是否輸入錯誤！')));
-        }
-        */
-
     }
 
     public function logout() {
