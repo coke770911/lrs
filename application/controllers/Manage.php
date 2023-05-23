@@ -35,13 +35,12 @@ class Manage extends CI_Controller {
             $this->M_UserApply->getData($ap_id_arr[$key]);
             $this->M_UserApply->setValue(array("ap_score" => $val));
 
+
             if($this->input->post("ap_scorePass".$ap_id_arr[$key]) == 1) {
                 $this->M_UserApply->setValue(array("ap_scorePass" => 1));
             } else {
                 $this->M_UserApply->setValue(array("ap_scorePass" => 0));
             }
-
-
 
             if(!$this->M_UserApply->update() > 0) {
                 die(json_encode(array('code' => 0,'msg' => '更新失敗，請洽系統管理人員')));
@@ -100,9 +99,14 @@ class Manage extends CI_Controller {
     }
 
     public function checkPay($id) {
+
         $data["info"] = $this->M_Registration->getList();
         $data["list"] = $this->M_UserApply->getApplyList($id);
 		
+
+        $data["info"] =  $this->M_Registration->getList();
+        $data["list"] = $this->M_UserApply->getApplyList($id);
+
         $this->load->view('V_header_manage');
         $this->load->view('V_checkList',$data);
         $this->load->view('V_footer');
